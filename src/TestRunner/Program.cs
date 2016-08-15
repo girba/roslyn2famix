@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Tests
+using Tests;
+
+namespace TestRunner
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello!");
+            var test = new ClassTest();
+            test.Method_Test();
+
             Console.ReadKey();
         }
     }

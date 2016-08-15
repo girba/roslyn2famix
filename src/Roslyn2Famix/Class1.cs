@@ -10,5 +10,10 @@ namespace Roslyn2Famix
         public Class1()
         {
         }
+
+        public string Method1()
+        {
+            return "Hello";
+        }
     }
 }

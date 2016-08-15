@@ -1,9 +1,7 @@
-{
+﻿{
   "version": "1.0.0-*",
 
   "dependencies": {
-    "Famix": "1.0.0-*",
-    "Microsoft.CodeAnalysis": "2.0.0-beta3",
     "NETStandard.Library": "1.6.0"
   },
 
