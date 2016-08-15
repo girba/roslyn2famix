@@ -1,10 +1,5 @@
 ﻿namespace Roslyn2Famix
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -29,6 +24,8 @@
     
         public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
+
+
             var methodName = node.Identifier.ToString();
             var method = new Method(methodName);
 

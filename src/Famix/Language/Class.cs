@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Famix.Language
+﻿namespace Famix.Language
 {
+    using System.Collections.Generic;
+    using System.Text;
+
     public class Class : IFamixLanguageNode
     {
         private readonly string name;
@@ -28,7 +27,7 @@ namespace Famix.Language
                 famixBuilder.AppendLine(method.ToString());
             }
 
-            famixBuilder.AppendLine($"(Class {this.name})");
+            famixBuilder.AppendLine($"(Class {this.name} end)");
 
             return famixBuilder.ToString();
         }

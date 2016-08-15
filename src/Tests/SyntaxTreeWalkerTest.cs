@@ -1,30 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Famix.Language;
-using Microsoft.CodeAnalysis.CSharp;
-using Roslyn2Famix;
-using Xunit;
-
-namespace Tests
+﻿namespace Tests
 {
+    using System;
+    using Microsoft.CodeAnalysis.CSharp;
+    using Roslyn2Famix;
+    using Xunit;
+
     /// <summary>
-    /// Tests the <see cref="Class"/> public API.
+    /// Tests the <see cref="SyntaxTreeWalker"/> public API.
     /// </summary>
-    public class ClassTest
+    public class SyntaxTreeWalkerTest
     {
-        private Class1 instanceUnderTest;
-
-        /// <summary>
-        /// Common set of functions that are performed just before each test
-        /// method is called.
-        /// </summary>
-        public ClassTest()
-        {
-            this.instanceUnderTest = new Class1();   
-        }
-
         /// <summary>
         /// Tests that the Strategy is initialized correctly.
         /// </summary>
@@ -46,7 +31,7 @@ namespace Tests
             
             var expectedFamix = "(Class SimpleClassWithMethod)" + Environment.NewLine +
                                 "(Method SimpleMethod)" + Environment.NewLine +
-                                "(Class SimpleClassWithMethod)" + Environment.NewLine;
+                                "(Class SimpleClassWithMethod end)" + Environment.NewLine;
 
             // Act
             var parsedFamix = walker.ToFamixString();
