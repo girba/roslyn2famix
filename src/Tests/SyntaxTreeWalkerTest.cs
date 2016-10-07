@@ -1,6 +1,7 @@
 ﻿namespace Tests
 {
     using System;
+    using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
     using Roslyn2Famix;
     using Xunit;
@@ -10,14 +11,12 @@
     /// </summary>
     public class SyntaxTreeWalkerTest
     {
-        /// <summary>
-        /// Tests that the Strategy is initialized correctly.
-        /// </summary>
-        [Fact]
-        public void Method_Test()
+        private readonly SyntaxTree testSyntaxTree;
+        private readonly SyntaxTreeWalker walkerUnderTest;
+
+        public SyntaxTreeWalkerTest()
         {
-            // Arrange
-            var tree = CSharpSyntaxTree.ParseText(@"
+            this.testSyntaxTree = CSharpSyntaxTree.ParseText(@"
                 public class SimpleClassWithMethod
                 {
                     public void SimpleMethod()
@@ -26,19 +25,26 @@
                     }
                 }");
 
-            var walker = new SyntaxTreeWalker();
-            walker.Visit(tree.GetRoot());
-            
+            this.walkerUnderTest = new SyntaxTreeWalker();
+        }
+
+        /// <summary>
+        /// Tests the Strategy <see cref="SyntaxTreeWalker.Visit"/> method.
+        /// </summary>
+        [Fact]
+        public void Visit_Test()
+        {
+            // Arrange
             var expectedFamix = "(Class SimpleClassWithMethod)" + Environment.NewLine +
                                 "(Method SimpleMethod)" + Environment.NewLine +
                                 "(Class SimpleClassWithMethod end)" + Environment.NewLine;
 
             // Act
-            var parsedFamix = walker.ToFamixString();
-
-            Console.WriteLine(parsedFamix);
+            walkerUnderTest.Visit(testSyntaxTree.GetRoot());
 
             // Assert
+            var parsedFamix = walkerUnderTest.ToFamixString();
+
             Assert.Equal(parsedFamix, expectedFamix);
         }
     }
