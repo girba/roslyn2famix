@@ -11,10 +11,10 @@
         {
             this.name = name;
 
-            this.Namespaces = new List<Namespace>();
+            this.Assemblies = new List<Assembly>();
         }
 
-        public IList<Namespace> Namespaces { get; }
+        public IList<Assembly> Assemblies { get; }
 
         public override string ToString()
         {
@@ -22,9 +22,9 @@
 
             famixBuilder.AppendLine($"(Project {this.name})");
 
-            foreach (var @namespace in this.Namespaces)
+            foreach (var assembly in this.Assemblies)
             {
-                famixBuilder.AppendLine(@namespace.ToString());
+                famixBuilder.AppendLine(assembly.ToString());
             }
 
             famixBuilder.AppendLine($"(Project {this.name} end)");
