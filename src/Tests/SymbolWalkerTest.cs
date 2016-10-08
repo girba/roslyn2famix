@@ -11,7 +11,7 @@
     using Famix;
 
     /// <summary>
-    /// Tests the <see cref="SyntaxTreeWalker"/> public API.
+    /// Tests the <see cref="SymbolWalker"/> public API.
     /// </summary>
     public class SymbolWalkerTest
     {

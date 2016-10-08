@@ -12,6 +12,24 @@
             this.builder = builder;
         }
 
+        public override void VisitAssembly(IAssemblySymbol symbol)
+        {
+            foreach (var childSymbol in symbol.Modules)
+            {
+                childSymbol.Accept(this);
+            }
+
+            base.VisitAssembly(symbol);
+        }
+
+        public override void VisitModule(IModuleSymbol symbol)
+        {
+            var globalNamespace = symbol.GlobalNamespace;
+            globalNamespace.Accept(this);
+
+            base.VisitModule(symbol);
+        }
+
         public override void VisitNamespace(INamespaceSymbol symbol)
         {
             foreach (var childSymbol in symbol.GetMembers())
