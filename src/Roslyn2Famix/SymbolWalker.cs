@@ -1,17 +1,16 @@
 ﻿namespace Roslyn2Famix
 {
-    using Famix.Language;
+    using Famix;
     using Microsoft.CodeAnalysis;
 
     public class SymbolWalker : SymbolVisitor
     {
-        private Class rootClass = null;
+        private readonly FamixTreeBuilder builder;
 
-        public string ToFamixString()
+        public SymbolWalker(FamixTreeBuilder builder)
         {
-            return rootClass?.ToString();
+            this.builder = builder;
         }
-
 
         public override void VisitNamespace(INamespaceSymbol symbol)
         {
@@ -26,9 +25,9 @@
         public override void VisitNamedType(INamedTypeSymbol symbol)
         {
             var className = symbol.Name;
-            this.rootClass = new Class(className);
-            
-            foreach(var childSymbol in symbol.GetMembers())
+            this.builder.CreateClass(className);
+
+            foreach (var childSymbol in symbol.GetMembers())
             {
                 childSymbol.Accept(this);
             }
@@ -41,11 +40,9 @@
             if (!symbol.IsImplicitlyDeclared)
             {
                 var methodName = symbol.Name;
-                var method = new Method(methodName);
-
-                this.rootClass?.Methods.Add(method);
+                this.builder.CreateMethod(methodName);
             }
-            
+
             base.VisitMethod(symbol);
         }
     }

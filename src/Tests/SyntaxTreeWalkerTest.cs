@@ -5,6 +5,7 @@
     using Microsoft.CodeAnalysis.CSharp;
     using Roslyn2Famix;
     using Xunit;
+    using Famix;
 
     /// <summary>
     /// Tests the <see cref="SyntaxTreeWalker"/> public API.
@@ -12,6 +13,8 @@
     public class SyntaxTreeWalkerTest
     {
         private readonly SyntaxTree testSyntaxTree;
+
+        private readonly FamixTreeBuilder builderUnderTest;
         private readonly SyntaxTreeWalker walkerUnderTest;
 
         public SyntaxTreeWalkerTest()
@@ -25,7 +28,8 @@
                     }
                 }");
 
-            this.walkerUnderTest = new SyntaxTreeWalker();
+            this.builderUnderTest = new FamixTreeBuilder();
+            this.walkerUnderTest = new SyntaxTreeWalker(builderUnderTest);
         }
 
         /// <summary>
@@ -43,7 +47,7 @@
             walkerUnderTest.Visit(testSyntaxTree.GetRoot());
 
             // Assert
-            var parsedFamix = walkerUnderTest.ToFamixString();
+            var parsedFamix = builderUnderTest.ToFamixString();
 
             Assert.Equal(parsedFamix, expectedFamix);
         }

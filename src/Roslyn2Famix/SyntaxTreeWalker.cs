@@ -3,33 +3,29 @@
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-    using Famix.Language;
+    using Famix;
 
     public class SyntaxTreeWalker : CSharpSyntaxWalker
     {
-        private Class rootClass = null;
+        private readonly FamixTreeBuilder builder;
 
-        public string ToFamixString()
+        public SyntaxTreeWalker(FamixTreeBuilder builder)
         {
-            return rootClass?.ToString();
+            this.builder = builder;
         }
 
         public override void VisitClassDeclaration(ClassDeclarationSyntax node)
         {
             var className = node.Identifier.ToString();
-            this.rootClass = new Class(className);
-            
+            this.builder.CreateClass(className);
+
             base.VisitClassDeclaration(node);
         }
-    
+
         public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
-
-
             var methodName = node.Identifier.ToString();
-            var method = new Method(methodName);
-
-            this.rootClass?.Methods.Add(method);
+            this.builder.CreateMethod(methodName);
 
             base.VisitMethodDeclaration(node);
         }

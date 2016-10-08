@@ -8,20 +8,24 @@
     using System.Linq;
     using System.IO;
     using TestData;
+    using Famix;
 
     /// <summary>
     /// Tests the <see cref="SyntaxTreeWalker"/> public API.
     /// </summary>
     public class SymbolWalkerTest
     {
-        private INamedTypeSymbol testFixtureClass;
-        private SymbolWalker walkerUnderTest;
+        private readonly INamedTypeSymbol testFixtureClass;
+
+        private readonly FamixTreeBuilder builderUnderTest;
+        private readonly SymbolWalker walkerUnderTest;
 
         public SymbolWalkerTest()
         {
             const string testFixturesProjectName = "Tests.Fixtures";
-            string pathToSolution = Path.Combine(@"..\..\..\..\..\..\", "Roslyn2Famix.sln");
-            
+            const string solutionDirectoryPath = @"..\..\..\..\..\..\";
+            string pathToSolution = Path.Combine(solutionDirectoryPath, "Roslyn2Famix.sln");
+
             var workspace = MSBuildWorkspace.Create();
 
             var solution = workspace.OpenSolutionAsync(pathToSolution).Result;
@@ -33,8 +37,9 @@
             var compilation = testFixturesProject.GetCompilationAsync().Result;
 
             this.testFixtureClass = compilation.GetTypeByMetadataName(typeof(SimpleClassWithMethod).FullName);
-            
-            this.walkerUnderTest = new SymbolWalker();
+
+            this.builderUnderTest = new FamixTreeBuilder();
+            this.walkerUnderTest = new SymbolWalker(builderUnderTest);
         }
 
         /// <summary>
@@ -50,9 +55,9 @@
 
             // Act
             walkerUnderTest.Visit(testFixtureClass);
-            
+
             // Assert
-            var parsedFamix = walkerUnderTest.ToFamixString();
+            var parsedFamix = builderUnderTest.ToFamixString();
 
             Assert.Equal(parsedFamix, expectedFamix);
         }
