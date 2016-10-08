@@ -1,10 +1,22 @@
-﻿using Famix.Language;
-
-namespace Famix
+﻿namespace Famix
 {
+    using Famix.Language;
+
     public class FamixTreeBuilder
     {
         private Class rootClass = null;
+
+        public void CreateSolution()
+        {
+        }
+
+        public void CreateProject(string name)
+        {
+        }
+
+        public void CreateAssembly(string name)
+        {
+        }
 
         public void CreateNamespace(string name)
         {
