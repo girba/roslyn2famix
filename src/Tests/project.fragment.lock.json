@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "exports": {
+    "Tests.Fixtures/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/Tests.Fixtures.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/Tests.Fixtures.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/Tests.Fixtures.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    }
+  }
+}
