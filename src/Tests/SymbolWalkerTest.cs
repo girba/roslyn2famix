@@ -11,7 +11,7 @@
     using Famix;
 
     /// <summary>
-    /// Tests the <see cref="SymbolWalker"/> public API.
+    /// Tests the <see cref="SymbolWalker"/> class.
     /// </summary>
     public class SymbolWalkerTest
     {

@@ -8,7 +8,7 @@
     using Famix;
 
     /// <summary>
-    /// Tests the <see cref="SyntaxTreeWalker"/> public API.
+    /// Tests the <see cref="SyntaxTreeWalker"/> class.
     /// </summary>
     public class SyntaxTreeWalkerTest
     {

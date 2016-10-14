@@ -1,5 +1,6 @@
 ﻿namespace Famix
 {
+    using Exceptions;
     using Famix.Language;
 
     public class FamixTreeBuilder
@@ -25,6 +26,14 @@
         public void CreateClass(string name)
         {
             this.rootClass = new Class(name);
+        }
+
+        public void EndClass(string name)
+        {
+            if(this.rootClass.Name != name)
+            {
+                throw new UnexpectedNodeNameException<Class>(this.rootClass, name);
+            }
         }
 
         public void CreateMethod(string name)
