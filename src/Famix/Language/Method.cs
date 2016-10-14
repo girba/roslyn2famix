@@ -2,16 +2,16 @@
 {
     public class Method
     {
-        private readonly string name;
-
         public Method(string name)
         {
-            this.name = name;
+            this.Name = name;
         }
-
+        
+        public string Name { get; }
+        
         public override string ToString()
         {
-            return $"(Method {this.name})";
+            return $"(Method {this.Name})";
         }
     }
 }

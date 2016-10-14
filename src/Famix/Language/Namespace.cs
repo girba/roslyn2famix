@@ -5,14 +5,14 @@
 
     public class Namespace : IFamixLanguageNode
     {
-        private readonly string name;
-
         public Namespace(string name)
         {
-            this.name = name;
+            this.Name = name;
 
             this.Classes = new List<Class>();
         }
+
+        public string Name { get; }
 
         public IList<Class> Classes { get; }
 
@@ -20,14 +20,14 @@
         {
             var famixBuilder = new StringBuilder();
 
-            famixBuilder.AppendLine($"(Namespace {this.name})");
+            famixBuilder.AppendLine($"(Namespace {this.Name})");
 
             foreach (var @class in this.Classes)
             {
                 famixBuilder.AppendLine(@class.ToString());
             }
 
-            famixBuilder.AppendLine($"(Namespace {this.name} end)");
+            famixBuilder.AppendLine($"(Namespace {this.Name} end)");
 
             return famixBuilder.ToString();
         }

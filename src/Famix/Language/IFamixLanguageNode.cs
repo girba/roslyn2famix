@@ -1,6 +1,7 @@
 ﻿namespace Famix.Language
 {
-    public class IFamixLanguageNode
+    public interface IFamixLanguageNode
     {
+        string Name { get; }
     }
 }

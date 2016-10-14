@@ -5,14 +5,14 @@
 
     public class Project : IFamixLanguageNode
     {
-        private readonly string name;
-
         public Project(string name)
         {
-            this.name = name;
+            this.Name = name;
 
             this.Assemblies = new List<Assembly>();
         }
+
+        public string Name { get; }
 
         public IList<Assembly> Assemblies { get; }
 
@@ -20,14 +20,14 @@
         {
             var famixBuilder = new StringBuilder();
 
-            famixBuilder.AppendLine($"(Project {this.name})");
+            famixBuilder.AppendLine($"(Project {this.Name})");
 
             foreach (var assembly in this.Assemblies)
             {
                 famixBuilder.AppendLine(assembly.ToString());
             }
 
-            famixBuilder.AppendLine($"(Project {this.name} end)");
+            famixBuilder.AppendLine($"(Project {this.Name} end)");
 
             return famixBuilder.ToString();
         }

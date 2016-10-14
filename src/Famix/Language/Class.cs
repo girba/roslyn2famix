@@ -5,14 +5,14 @@
 
     public class Class : IFamixLanguageNode
     {
-        private readonly string name;
-
         public Class(string name)
         {
-            this.name = name;
+            this.Name = name;
 
             this.Methods = new List<Method>();
         }
+
+        public string Name { get; }
 
         public IList<Method> Methods { get; }
 
@@ -20,14 +20,14 @@
         {
             var famixBuilder = new StringBuilder();
 
-            famixBuilder.AppendLine($"(Class {this.name})");
+            famixBuilder.AppendLine($"(Class {this.Name})");
 
             foreach (var method in this.Methods)
             {
                 famixBuilder.AppendLine(method.ToString());
             }
 
-            famixBuilder.AppendLine($"(Class {this.name} end)");
+            famixBuilder.AppendLine($"(Class {this.Name} end)");
 
             return famixBuilder.ToString();
         }
