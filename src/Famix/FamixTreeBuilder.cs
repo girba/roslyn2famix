@@ -74,10 +74,32 @@
 
         public void BeginAssembly(string name)
         {
+            var currentNode = currentNodeStack.Peek() as Project;
+            if (currentNode == null)
+            {
+                throw new UnexpectedNodeTypeException<Project>(currentNodeStack.Peek());
+            }
+
+            var assembly = new Assembly(name);
+            currentNode.Assemblies.Add(assembly);
+
+            currentNodeStack.Push(assembly);
         }
 
         public void EndAssembly(string name)
         {
+            var currentNode = currentNodeStack.Peek() as Assembly;
+            if (currentNode == null)
+            {
+                throw new UnexpectedNodeTypeException<Assembly>(currentNodeStack.Peek());
+            }
+
+            if (currentNode.Name != name)
+            {
+                throw new UnexpectedNodeNameException<Assembly>(currentNode, name);
+            }
+
+            currentNodeStack.Pop();
         }
 
         public void BeginNamespace(string name)
