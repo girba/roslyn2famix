@@ -5,9 +5,9 @@
 
     public class Solution : IFamixLanguageNode
     {
-        public Solution(string name)
+        public Solution()
         {
-            this.Name = name;
+            this.Name = string.Empty;
 
             this.Projects = new List<Project>();
         }
@@ -20,14 +20,14 @@
         {
             var famixBuilder = new StringBuilder();
 
-            famixBuilder.AppendLine($"(Solution {this.Name})");
+            famixBuilder.AppendLine($"(Solution)");
 
             foreach (var project in this.Projects)
             {
                 famixBuilder.AppendLine(project.ToString());
             }
 
-            famixBuilder.AppendLine($"(Solution {this.Name} end)");
+            famixBuilder.AppendLine($"(Solution end)");
 
             return famixBuilder.ToString();
         }

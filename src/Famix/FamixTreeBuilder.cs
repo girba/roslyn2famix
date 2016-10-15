@@ -1,17 +1,45 @@
 ﻿namespace Famix
 {
+    using Exceptions;
     using Famix.Language;
+    using System.Collections.Generic;
 
     public class FamixTreeBuilder
     {
         private Class rootClass = null;
+        private readonly Stack<IFamixLanguageNode> currentNodeStack;
+
+        public FamixTreeBuilder()
+        {
+            this.currentNodeStack = new Stack<IFamixLanguageNode>();
+        }
 
         public void BeginSolution()
         {
+            if (this.currentNodeStack.Count != 0)
+            {
+                throw new FamixTreeException("Solution node already exist.");
+            }
+
+            var solution = new Solution();
+
+            currentNodeStack.Push(solution);
         }
 
         public void EndSolution()
         {
+            var currentNode = currentNodeStack.Peek() as Solution;
+            if (currentNode == null)
+            {
+                throw new UnexpectedNodeTypeException<Solution>(currentNode);
+            }
+
+            if (this.currentNodeStack.Count != 1)
+            {
+                throw new FamixTreeException("Solution must be the root node.");
+            }
+
+            currentNodeStack.Pop();
         }
 
         public void BeginProject(string name)
