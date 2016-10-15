@@ -24,7 +24,7 @@
 
             foreach (var project in this.Projects)
             {
-                famixBuilder.AppendLine(project.ToString());
+                famixBuilder.Append(project.ToString());
             }
 
             famixBuilder.AppendLine($"(Solution end)");

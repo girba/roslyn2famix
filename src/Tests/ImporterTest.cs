@@ -29,9 +29,22 @@
         public void Run_Test()
         {
             // Arrange
-            var expectedFamix = "(Class SimpleClassWithMethod)" + Environment.NewLine +
+            var expectedFamix = "(Solution)" + Environment.NewLine +
+                                "(Project Tests.Fixtures)" + Environment.NewLine +
+                                "(Assembly Tests.Fixtures)" + Environment.NewLine +
+                                "(Namespace)" + Environment.NewLine +
+                                "(Namespace Tests)" + Environment.NewLine +
+                                "(Namespace TestData)" + Environment.NewLine +
+                                "(Class SimpleClassWithMethod)" + Environment.NewLine +
                                 "(Method SimpleMethod)" + Environment.NewLine +
-                                "(Class SimpleClassWithMethod end)" + Environment.NewLine;
+                                "(Method SimpleMethod end)" + Environment.NewLine +
+                                "(Class SimpleClassWithMethod end)" + Environment.NewLine +
+                                "(Namespace TestData end)" + Environment.NewLine +
+                                "(Namespace Tests end)" + Environment.NewLine +
+                                "(Namespace end)" + Environment.NewLine +
+                                "(Assembly Tests.Fixtures end)" + Environment.NewLine +
+                                "(Project Tests.Fixtures end)" + Environment.NewLine +
+                                "(Solution end)" + Environment.NewLine;
 
             // Act
             importerUnderTest.Run(this.pathToTestSolution);

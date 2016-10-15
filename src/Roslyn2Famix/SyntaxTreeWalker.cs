@@ -20,6 +20,8 @@
             this.builder.BeginClass(className);
 
             base.VisitClassDeclaration(node);
+
+            this.builder.EndClass(className);
         }
 
         public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
@@ -28,6 +30,8 @@
             this.builder.BeginMethod(methodName);
 
             base.VisitMethodDeclaration(node);
+
+            this.builder.EndMethod(methodName);
         }
     }
 }

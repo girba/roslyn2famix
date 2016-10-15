@@ -51,6 +51,7 @@
             // Arrange
             var expectedFamix = "(Class SimpleClassWithMethod)" + Environment.NewLine +
                                 "(Method SimpleMethod)" + Environment.NewLine +
+                                "(Method SimpleMethod end)" + Environment.NewLine +
                                 "(Class SimpleClassWithMethod end)" + Environment.NewLine;
 
             // Act

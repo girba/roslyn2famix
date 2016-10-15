@@ -24,7 +24,7 @@
 
             foreach (var @namespace in this.Namespaces)
             {
-                famixBuilder.AppendLine(@namespace.ToString());
+                famixBuilder.Append(@namespace.ToString());
             }
 
             famixBuilder.AppendLine($"(Assembly {this.Name} end)");

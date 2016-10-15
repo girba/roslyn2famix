@@ -10,24 +10,47 @@
             this.Name = name;
 
             this.Classes = new List<Class>();
+            this.Namespaces = new List<Namespace>();
         }
 
         public string Name { get; }
 
         public IList<Class> Classes { get; }
 
+        public IList<Namespace> Namespaces { get; }
+
         public override string ToString()
         {
             var famixBuilder = new StringBuilder();
 
-            famixBuilder.AppendLine($"(Namespace {this.Name})");
+            var isEmptyNamespace = string.IsNullOrEmpty(this.Name);
+            if (!isEmptyNamespace)
+            {
+                famixBuilder.AppendLine($"(Namespace {this.Name})");
+            }
+            else
+            {
+                famixBuilder.AppendLine($"(Namespace)");
+            }
 
             foreach (var @class in this.Classes)
             {
-                famixBuilder.AppendLine(@class.ToString());
+                famixBuilder.Append(@class.ToString());
             }
 
-            famixBuilder.AppendLine($"(Namespace {this.Name} end)");
+            foreach (var @namespace in this.Namespaces)
+            {
+                famixBuilder.Append(@namespace.ToString());
+            }
+
+            if (!isEmptyNamespace)
+            {
+                famixBuilder.AppendLine($"(Namespace {this.Name} end)");
+            }
+            else
+            {
+                famixBuilder.AppendLine($"(Namespace end)");
+            }
 
             return famixBuilder.ToString();
         }

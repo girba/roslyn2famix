@@ -24,7 +24,7 @@
 
             foreach (var assembly in this.Assemblies)
             {
-                famixBuilder.AppendLine(assembly.ToString());
+                famixBuilder.Append(assembly.ToString());
             }
 
             famixBuilder.AppendLine($"(Project {this.Name} end)");

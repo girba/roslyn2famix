@@ -10,11 +10,14 @@
             this.Name = name;
 
             this.Methods = new List<Method>();
+            this.Classes = new List<Class>();
         }
 
         public string Name { get; }
 
         public IList<Method> Methods { get; }
+
+        public IList<Class> Classes { get; }
 
         public override string ToString()
         {
@@ -24,7 +27,12 @@
 
             foreach (var method in this.Methods)
             {
-                famixBuilder.AppendLine(method.ToString());
+                famixBuilder.Append(method.ToString());
+            }
+
+            foreach (var @class in this.Classes)
+            {
+                famixBuilder.Append(@class.ToString());
             }
 
             famixBuilder.AppendLine($"(Class {this.Name} end)");
