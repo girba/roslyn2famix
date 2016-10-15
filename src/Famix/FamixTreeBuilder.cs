@@ -31,7 +31,7 @@
             var currentNode = currentNodeStack.Peek() as Solution;
             if (currentNode == null)
             {
-                throw new UnexpectedNodeTypeException<Solution>(currentNode);
+                throw new UnexpectedNodeTypeException<Solution>(currentNodeStack.Peek());
             }
 
             if (this.currentNodeStack.Count != 1)
@@ -44,10 +44,32 @@
 
         public void BeginProject(string name)
         {
+            var currentNode = currentNodeStack.Peek() as Solution;
+            if (currentNode == null)
+            {
+                throw new UnexpectedNodeTypeException<Solution>(currentNodeStack.Peek());
+            }
+
+            var project = new Project(name);
+            currentNode.Projects.Add(project);
+
+            currentNodeStack.Push(project);
         }
 
         public void EndProject(string name)
         {
+            var currentNode = currentNodeStack.Peek() as Project;
+            if (currentNode == null)
+            {
+                throw new UnexpectedNodeTypeException<Project>(currentNodeStack.Peek());
+            }
+
+            if (currentNode.Name != name)
+            {
+                throw new UnexpectedNodeNameException<Project>(currentNode, name);
+            }
+
+            currentNodeStack.Pop();
         }
 
         public void BeginAssembly(string name)
