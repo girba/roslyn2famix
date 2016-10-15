@@ -17,7 +17,7 @@
         public override void VisitClassDeclaration(ClassDeclarationSyntax node)
         {
             var className = node.Identifier.ToString();
-            this.builder.CreateClass(className);
+            this.builder.BeginClass(className);
 
             base.VisitClassDeclaration(node);
         }
@@ -25,7 +25,7 @@
         public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
             var methodName = node.Identifier.ToString();
-            this.builder.CreateMethod(methodName);
+            this.builder.BeginMethod(methodName);
 
             base.VisitMethodDeclaration(node);
         }

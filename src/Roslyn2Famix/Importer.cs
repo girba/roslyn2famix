@@ -20,16 +20,20 @@
 
             var solution = workspace.OpenSolutionAsync(solutionPath).Result;
 
-            builder.CreateSolution();
+            builder.BeginSolution();
 
             foreach (var project in solution.Projects)
             {
-                builder.CreateProject(project.Name);
+                builder.BeginProject(project.Name);
 
                 var compilation = project.GetCompilationAsync().Result;
 
                 walker.Visit(compilation.Assembly);
+
+                builder.EndProject(project.Name);
             }
+
+            builder.EndSolution();
         }
 
         public string ExportToString()

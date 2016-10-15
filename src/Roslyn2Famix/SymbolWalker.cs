@@ -12,56 +12,65 @@
             this.builder = builder;
         }
 
-        public override void VisitAssembly(IAssemblySymbol symbol)
+        public override void VisitAssembly(IAssemblySymbol assemblySymbol)
         {
-            foreach (var childSymbol in symbol.Modules)
+            builder.BeginAssembly(assemblySymbol.Name);
+
+            foreach (var childSymbol in assemblySymbol.Modules)
             {
                 childSymbol.Accept(this);
             }
 
-            base.VisitAssembly(symbol);
+            builder.EndAssembly(assemblySymbol.Name);
+
+            base.VisitAssembly(assemblySymbol);
         }
 
-        public override void VisitModule(IModuleSymbol symbol)
+        public override void VisitModule(IModuleSymbol moduleSymbol)
         {
-            var globalNamespace = symbol.GlobalNamespace;
+            var globalNamespace = moduleSymbol.GlobalNamespace;
             globalNamespace.Accept(this);
 
-            base.VisitModule(symbol);
+            base.VisitModule(moduleSymbol);
         }
 
-        public override void VisitNamespace(INamespaceSymbol symbol)
+        public override void VisitNamespace(INamespaceSymbol namespaceSymbol)
         {
-            foreach (var childSymbol in symbol.GetMembers())
+            builder.BeginNamespace(namespaceSymbol.Name);
+
+            foreach (var childSymbol in namespaceSymbol.GetMembers())
             {
                 childSymbol.Accept(this);
             }
 
-            base.VisitNamespace(symbol);
+            builder.EndNamespace(namespaceSymbol.Name);
+
+            base.VisitNamespace(namespaceSymbol);
         }
 
-        public override void VisitNamedType(INamedTypeSymbol symbol)
+        public override void VisitNamedType(INamedTypeSymbol namedTypeSymbol)
         {
-            var className = symbol.Name;
-            this.builder.CreateClass(className);
+            this.builder.BeginClass(namedTypeSymbol.Name);
 
-            foreach (var childSymbol in symbol.GetMembers())
+            foreach (var childSymbol in namedTypeSymbol.GetMembers())
             {
                 childSymbol.Accept(this);
             }
 
-            base.VisitNamedType(symbol);
+            this.builder.EndClass(namedTypeSymbol.Name);
+
+            base.VisitNamedType(namedTypeSymbol);
         }
 
-        public override void VisitMethod(IMethodSymbol symbol)
+        public override void VisitMethod(IMethodSymbol methodSymbol)
         {
-            if (!symbol.IsImplicitlyDeclared)
+            if (!methodSymbol.IsImplicitlyDeclared)
             {
-                var methodName = symbol.Name;
-                this.builder.CreateMethod(methodName);
+                this.builder.BeginMethod(methodSymbol.Name);
+                this.builder.EndMethod(methodSymbol.Name);
             }
 
-            base.VisitMethod(symbol);
+            base.VisitMethod(methodSymbol);
         }
     }
 }

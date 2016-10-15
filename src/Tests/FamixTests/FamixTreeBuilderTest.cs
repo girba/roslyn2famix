@@ -24,7 +24,7 @@
             var expectedFamix = "(Class TestClass)" + Environment.NewLine +
                                 "(Class TestClass end)" + Environment.NewLine;
 
-            builderUnderTest.CreateClass("TestClass");
+            builderUnderTest.BeginClass("TestClass");
 
             // Act
             builderUnderTest.EndClass("TestClass");
@@ -42,7 +42,7 @@
         public void EndClass_UnexpectedClassName_Test()
         {
             // Arrange
-            builderUnderTest.CreateClass("TestClass");
+            builderUnderTest.BeginClass("TestClass");
 
             // Act
             // Assert
