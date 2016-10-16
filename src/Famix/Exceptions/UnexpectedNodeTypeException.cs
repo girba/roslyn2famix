@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Famix.Language;
+using Famix.Language.Contracts;
 using Famix.Exceptions;
 
 namespace Famix
 {
     [Serializable]
-    public class UnexpectedNodeTypeException<T> : FamixTreeException where T : IFamixLanguageNode
+    public class UnexpectedNodeTypeException<T> : FamixTreeException where T : IFamixNode
     {
         public UnexpectedNodeTypeException()
         {
@@ -20,12 +20,12 @@ namespace Famix
         {
         }
 
-        public UnexpectedNodeTypeException(IFamixLanguageNode node) : base(CreateMessage(node))
+        public UnexpectedNodeTypeException(IFamixNode node) : base(CreateMessage(node))
         {
             this.Node = node;
         }
 
-        private static string CreateMessage(IFamixLanguageNode node)
+        private static string CreateMessage(IFamixNode node)
         {
             return $"Unexpected node type. Expected \"{typeof(T).Name}\" but was \"{node.GetType().Name}\"";
         }
@@ -36,6 +36,6 @@ namespace Famix
 
         public Type ExpectedNodeType => typeof(T);
 
-        public IFamixLanguageNode Node { get; }
+        public IFamixNode Node { get; }
     }
 }

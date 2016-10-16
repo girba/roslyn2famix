@@ -2,59 +2,44 @@
 {
     using Exceptions;
     using Famix.Language;
+    using Famix.Language.Contracts;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class FamixTreeBuilder
     {
-        private readonly Stack<IFamixLanguageNode> currentNodeStack;
-        private IFamixLanguageNode lastNode;
+        private readonly Stack<IFamixNode> currentNodeStack;
+        private IFamixNode rootNode;
 
         public FamixTreeBuilder()
         {
-            this.currentNodeStack = new Stack<IFamixLanguageNode>();
+            this.currentNodeStack = new Stack<IFamixNode>();
         }
+
+        private IFamixNode CurrentNode => this.currentNodeStack.Pop();
 
         public void BeginSolution()
         {
-            if (this.currentNodeStack.Count != 0)
+            if (this.currentNodeStack.Any())
             {
-                throw new FamixTreeException("Solution node already exist.");
+                throw new FamixTreeException("Solution must be the topmost node.");
             }
 
             var solution = new Solution();
 
-            currentNodeStack.Push(solution);
+            this.AddChildNode(solution);
         }
 
         public void EndSolution()
         {
-            var currentNode = currentNodeStack.Peek() as Solution;
-            if (currentNode == null)
-            {
-                throw new UnexpectedNodeTypeException<Solution>(currentNodeStack.Peek());
-            }
-
-            if (this.currentNodeStack.Count != 1)
-            {
-                throw new FamixTreeException("Solution must be the root node.");
-            }
-
-            var popedNode = currentNodeStack.Pop();
-            lastNode = popedNode;
+            this.EndNode<Solution>(string.Empty);
         }
 
         public void BeginProject(string name)
         {
-            var currentNode = currentNodeStack.Peek() as Solution;
-            if (currentNode == null)
-            {
-                throw new UnexpectedNodeTypeException<Solution>(currentNodeStack.Peek());
-            }
-
             var project = new Project(name);
-            currentNode.Projects.Add(project);
 
-            currentNodeStack.Push(project);
+            this.AddChildNode(project);
         }
 
         public void EndProject(string name)
@@ -64,16 +49,9 @@
 
         public void BeginAssembly(string name)
         {
-            var currentNode = currentNodeStack.Peek() as Project;
-            if (currentNode == null)
-            {
-                throw new UnexpectedNodeTypeException<Project>(currentNodeStack.Peek());
-            }
-
             var assembly = new Assembly(name);
-            currentNode.Assemblies.Add(assembly);
 
-            currentNodeStack.Push(assembly);
+            this.AddChildNode(assembly);
         }
 
         public void EndAssembly(string name)
@@ -85,28 +63,7 @@
         {
             var @namespace = new Namespace(name);
 
-            if (currentNodeStack.Count != 0)
-            {
-                var currentAssembly = currentNodeStack.Peek() as Assembly;
-                if (currentAssembly != null)
-                {
-                    currentAssembly.Namespaces.Add(@namespace);
-                }
-                else
-                {
-                    var currentNamepace = currentNodeStack.Peek() as Namespace;
-                    if (currentNamepace != null)
-                    {
-                        currentNamepace.Namespaces.Add(@namespace);
-                    }
-                    else
-                    {
-                        throw new UnexpectedNodeTypeException<Assembly>(currentNodeStack.Peek());
-                    }
-                }
-            }
-
-            currentNodeStack.Push(@namespace);
+            this.AddChildNode(@namespace);
         }
 
         public void EndNamespace(string name)
@@ -118,28 +75,7 @@
         {
             var @class = new Class(name);
 
-            if (currentNodeStack.Count != 0)
-            {
-                var currentNamepace = currentNodeStack.Peek() as Namespace;
-                if (currentNamepace != null)
-                {
-                    currentNamepace.Classes.Add(@class);
-                }
-                else
-                {
-                    var currentClass = currentNodeStack.Peek() as Class;
-                    if (currentClass != null)
-                    {
-                        currentClass.Classes.Add(@class);
-                    }
-                    else
-                    {
-                        throw new UnexpectedNodeTypeException<Class>(currentNodeStack.Peek());
-                    }
-                }
-            }
-
-            currentNodeStack.Push(@class);
+            this.AddChildNode(@class);
         }
 
         public void EndClass(string name)
@@ -149,16 +85,9 @@
 
         public void BeginMethod(string name)
         {
-            var currentNode = currentNodeStack.Peek() as Class;
-            if (currentNode == null)
-            {
-                throw new UnexpectedNodeTypeException<Class>(currentNodeStack.Peek());
-            }
-
             var method = new Method(name);
-            currentNode.Methods.Add(method);
 
-            currentNodeStack.Push(method);
+            this.AddChildNode(method);
         }
 
         public void EndMethod(string name)
@@ -168,10 +97,32 @@
 
         public string ToFamixString()
         {
-            return lastNode?.ToString();
+            return rootNode?.ToString();
         }
 
-        private void EndNode<T>(string name) where T : class, IFamixLanguageNode
+        private void AddChildNode<T>(T node) where T : class, IFamixNode
+        {
+            if (currentNodeStack.Any())
+            {
+                var currentNode = currentNodeStack.Peek() as IFamixContainer<T>;
+
+                if (currentNode == null)
+                {
+                    throw new UnexpectedNodeTypeException<T>(currentNode);
+                }
+
+                currentNode.Add(node);
+            }
+
+            if (!this.currentNodeStack.Any())
+            {
+                rootNode = node;
+            }
+
+            currentNodeStack.Push(node);
+        }
+
+        private void EndNode<T>(string name) where T : class, IFamixNode
         {
             var currentNode = currentNodeStack.Peek() as T;
             if (currentNode == null)
@@ -185,11 +136,6 @@
             }
 
             var popedNode = currentNodeStack.Pop();
-
-            if (currentNodeStack.Count == 0)
-            {
-                lastNode = popedNode;
-            }
         }
     }
 }

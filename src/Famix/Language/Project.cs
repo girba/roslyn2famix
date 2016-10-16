@@ -1,9 +1,10 @@
 ﻿namespace Famix.Language
 {
+    using Famix.Language.Contracts;
     using System.Collections.Generic;
     using System.Text;
 
-    public class Project : IFamixLanguageNode
+    public class Project : IFamixNode, IFamixContainer<Assembly>
     {
         public Project(string name)
         {
@@ -15,6 +16,11 @@
         public string Name { get; }
 
         public IList<Assembly> Assemblies { get; }
+
+        public void Add(Assembly assembly)
+        {
+            this.Assemblies.Add(assembly);
+        }
 
         public override string ToString()
         {

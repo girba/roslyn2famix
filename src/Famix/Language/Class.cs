@@ -1,9 +1,10 @@
 ﻿namespace Famix.Language
 {
+    using Famix.Language.Contracts;
     using System.Collections.Generic;
     using System.Text;
 
-    public class Class : IFamixLanguageNode
+    public class Class : IFamixNode, IFamixContainer<Class>, IFamixContainer<Method>
     {
         public Class(string name)
         {
@@ -18,6 +19,16 @@
         public IList<Method> Methods { get; }
 
         public IList<Class> Classes { get; }
+
+        public void Add(Class @class)
+        {
+            this.Classes.Add(@class);
+        }
+
+        public void Add(Method method)
+        {
+            this.Methods.Add(method);
+        }
 
         public override string ToString()
         {

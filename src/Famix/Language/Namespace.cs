@@ -1,9 +1,10 @@
 ﻿namespace Famix.Language
 {
+    using Famix.Language.Contracts;
     using System.Collections.Generic;
     using System.Text;
 
-    public class Namespace : IFamixLanguageNode
+    public class Namespace : IFamixNode, IFamixContainer<Class>, IFamixContainer<Namespace>
     {
         public Namespace(string name)
         {
@@ -18,6 +19,16 @@
         public IList<Class> Classes { get; }
 
         public IList<Namespace> Namespaces { get; }
+
+        public void Add(Class @class)
+        {
+            this.Classes.Add(@class);
+        }
+
+        public void Add(Namespace @namespace)
+        {
+            this.Namespaces.Add(@namespace);
+        }
 
         public override string ToString()
         {

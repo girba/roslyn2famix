@@ -1,8 +1,9 @@
 ﻿namespace Famix.Language
 {
+    using Famix.Language.Contracts;
     using System.Text;
 
-    public class Method : IFamixLanguageNode
+    public class Method : IFamixNode
     {
         public Method(string name)
         {

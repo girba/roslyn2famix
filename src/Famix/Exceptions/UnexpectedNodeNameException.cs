@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Famix.Language;
+using Famix.Language.Contracts;
 using Famix.Exceptions;
 
 namespace Famix
 {
     [Serializable]
-    public class UnexpectedNodeNameException<T> : FamixTreeException where T : IFamixLanguageNode
+    public class UnexpectedNodeNameException<T> : FamixTreeException where T : IFamixNode
     {
         public UnexpectedNodeNameException()
         {
