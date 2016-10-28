@@ -1,7 +1,7 @@
 ﻿namespace Tests
 {
     using System;
-    using Roslyn2Famix;
+    using Roslyn2FamixImporter;
     using Xunit;
     using System.IO;
 

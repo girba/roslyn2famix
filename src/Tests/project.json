@@ -9,7 +9,7 @@
     "Microsoft.CodeAnalysis": "2.0.0-beta3",
     "xunit": "2.2.0-beta2-build3300",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "Roslyn2Famix": { "target": "project" },
+    "Roslyn2FamixImporter": { "target": "project" },
     "Tests.Fixtures": { "target": "project" }
   },
 

@@ -1253,7 +1253,7 @@
           "net46/Famix.dll": {}
         }
       },
-      "Roslyn2Famix/1.0.0": {
+      "Roslyn2FamixImporter/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6",
         "dependencies": {
@@ -1262,10 +1262,10 @@
           "NETStandard.Library": "1.6.0"
         },
         "compile": {
-          "net46/Roslyn2Famix.dll": {}
+          "net46/Roslyn2FamixImporter.dll": {}
         },
         "runtime": {
-          "net46/Roslyn2Famix.dll": {}
+          "net46/Roslyn2FamixImporter.dll": {}
         }
       },
       "Tests.Fixtures/1.0.0": {
@@ -4759,10 +4759,10 @@
       "path": "../Famix/project.json",
       "msbuildProject": "../Famix/Famix.xproj"
     },
-    "Roslyn2Famix/1.0.0": {
+    "Roslyn2FamixImporter/1.0.0": {
       "type": "project",
-      "path": "../Roslyn2Famix/project.json",
-      "msbuildProject": "../Roslyn2Famix/Roslyn2Famix.xproj"
+      "path": "../Roslyn2FamixImporter/project.json",
+      "msbuildProject": "../Roslyn2FamixImporter/Roslyn2FamixImporter.xproj"
     },
     "Tests.Fixtures/1.0.0": {
       "type": "project",
@@ -4773,7 +4773,7 @@
     "": [
       "Microsoft.CodeAnalysis >= 2.0.0-beta3",
       "NETStandard.Library >= 1.6.0",
-      "Roslyn2Famix",
+      "Roslyn2FamixImporter",
       "Tests.Fixtures",
       "dotnet-test-xunit >= 2.2.0-preview2-build1029",
       "xunit >= 2.2.0-beta2-build3300"

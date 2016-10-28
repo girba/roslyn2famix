@@ -1,4 +1,4 @@
-﻿namespace Roslyn2Famix
+﻿namespace Roslyn2FamixImporter
 {
     using Famix;
     using Microsoft.CodeAnalysis.MSBuild;

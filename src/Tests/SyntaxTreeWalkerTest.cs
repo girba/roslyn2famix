@@ -3,7 +3,7 @@
     using System;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
-    using Roslyn2Famix;
+    using Roslyn2FamixImporter;
     using Xunit;
     using Famix;
 
