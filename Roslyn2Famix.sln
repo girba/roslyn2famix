@@ -1,26 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FF3DD35E-D0A1-42FF-9AE2-BB1DFB80688F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{408AF150-6A27-4655-97F3-944842BEE2F9}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Tests", "src\Tests\Tests.xproj", "{10D0C1EF-3C2A-493D-AFED-459EF19EAA99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "src\Tests\Tests.csproj", "{10D0C1EF-3C2A-493D-AFED-459EF19EAA99}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Famix", "src\Famix\Famix.xproj", "{AD1D077C-22D7-47F5-83E8-47F6C409EE10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Famix", "src\Famix\Famix.csproj", "{AD1D077C-22D7-47F5-83E8-47F6C409EE10}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Fixtures", "src\Tests.Fixtures\Tests.Fixtures.csproj", "{B706AFB6-A6A7-4874-9B88-2D583A250648}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Fame", "src\Fame\Fame.xproj", "{3F4EEDC6-E8FA-45DC-ACF7-7809BCD1DC75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fame", "src\Fame\Fame.csproj", "{3F4EEDC6-E8FA-45DC-ACF7-7809BCD1DC75}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Roslyn2FamixImporter", "src\Roslyn2FamixImporter\Roslyn2FamixImporter.xproj", "{75C16FC6-B60F-41B2-8CA1-28CAE1D7F686}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roslyn2FamixImporter", "src\Roslyn2FamixImporter\Roslyn2FamixImporter.csproj", "{75C16FC6-B60F-41B2-8CA1-28CAE1D7F686}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Roslyn2Famix", "src\Roslyn2Famix\Roslyn2Famix.xproj", "{C3289816-AEB2-4565-A441-9DC7DAA3998E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Roslyn2Famix", "src\Roslyn2Famix\Roslyn2Famix.csproj", "{C3289816-AEB2-4565-A441-9DC7DAA3998E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

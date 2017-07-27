@@ -60,7 +60,7 @@ namespace Fame.Fm3
         public static readonly MetaDescription NUMBER = new MetaDescription("Number");
         public static readonly MetaDescription OBJECT = new MetaDescription("Object");
         public static readonly MetaDescription STRING = new MetaDescription("String");
-        public static readonly MetaDescription DATE = new MetaDescription("String");
+        public static readonly MetaDescription DATE = new MetaDescription("Date");
 
         private Dictionary<string, PropertyDescription> _attributes;
         [FameProperty(Opposite = "class")]
