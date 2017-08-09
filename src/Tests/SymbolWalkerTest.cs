@@ -23,16 +23,15 @@
         public SymbolWalkerTest()
         {
             const string testFixturesProjectName = "Tests.Fixtures";
-            const string solutionDirectoryPath = @"..\..\..\..\..\..\";
-            string pathToSolution = Path.Combine(solutionDirectoryPath, "Roslyn2Famix.sln");
+            const string solutionDirectoryPath = @"..\..\..\..\";
+            string pathToSolution = Path.Combine(solutionDirectoryPath, "Tests.Fixtures.sln");
 
             var workspace = MSBuildWorkspace.Create();
 
             var solution = workspace.OpenSolutionAsync(pathToSolution).Result;
 
             var testFixturesProject = solution.Projects
-                    .Where(project => project.Name == testFixturesProjectName)
-                    .First();
+                    .First(project => project.Name == testFixturesProjectName);
 
             var compilation = testFixturesProject.GetCompilationAsync().Result;
 

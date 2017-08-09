@@ -16,8 +16,8 @@
 
         public ImporterTest()
         {
-            const string solutionDirectoryPath = @"..\..\..\..\..\..\";
-            this.pathToTestSolution = Path.Combine(solutionDirectoryPath, "Roslyn2Famix.sln");
+            const string solutionDirectoryPath = @"..\..\..\..\";
+            this.pathToTestSolution = Path.Combine(solutionDirectoryPath, "Tests.Fixtures.sln");
 
             this.importerUnderTest = new Importer();
         }
@@ -52,7 +52,7 @@
             // Assert
             var parsedFamix = importerUnderTest.ExportToString();
 
-            Assert.Equal(parsedFamix, expectedFamix);
+            Assert.Equal(expectedFamix, parsedFamix);
         }
     }
 }
