@@ -3,11 +3,19 @@
 namespace Fame.Parser
 {
 	// TODO
-	public class Importer
+	public class Importer : AbstractParserClient
 	{
-		public Importer(MetaRepository metamodel)
+		private MetaRepository metamodel;
+		private Repository model;
+
+		public Importer(MetaRepository metamodel) : this(metamodel, new Repository(metamodel))
 		{
-			throw new NotImplementedException();
+		}
+
+		public Importer(MetaRepository metamodel, Repository model)
+		{
+			this.metamodel = metamodel;
+			this.model = model;
 		}
 
 		public void ReadFrom(InputSource input)

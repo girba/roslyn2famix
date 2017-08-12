@@ -1,6 +1,17 @@
 namespace Fame.Parser
 {
-	// TODO
+	/// <summary>
+	/// Interface for reading MSE documents using callbacks. This interface allows an
+	/// application to register for MSE document parsing.The sequence of callbacks
+	/// is limited to the following protocol
+	/// 
+	/// <ul>
+	/// <li><code>MAIN := directive* beginDocument ELEM* endDocument</code>
+	/// <li><code>ELEM := beginElement serial? (beginAttribute (primitive | reference | ELEM )* endAttribute) endElement</code>
+	/// </ul>
+	/// 
+	/// @see Parser
+	/// </summary>
 	public interface IParseClient
 	{
 		void BeginAttribute(string name);

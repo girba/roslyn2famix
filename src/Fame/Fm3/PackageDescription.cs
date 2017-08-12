@@ -47,7 +47,7 @@
             }
         }
 
-        public override void CheckContraints(Warnings warnings)
+        public override void CheckConstraints(Warnings warnings)
         {
             if (!MetaRepository.IsValidName(Name))
                 warnings.Add("Name must be alphanumeric", this);

@@ -159,7 +159,7 @@ namespace Fame.Fm3
             return Package;
         }
 
-        public override void CheckContraints(Warnings warnings)
+        public override void CheckConstraints(Warnings warnings)
         {
             int container = AllAttributes().Count(property => property.IsContainer);
 

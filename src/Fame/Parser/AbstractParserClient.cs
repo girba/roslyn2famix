@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Fame.Parser
+﻿namespace Fame.Parser
 {
 	/// <summary>
 	/// Empty implementation of {@link ParseClient}.
@@ -9,6 +7,8 @@ namespace Fame.Parser
 	/// </summary>
 	public class AbstractParserClient : IParseClient
 	{
+		// TODO
+
 		public void BeginAttribute(string name)
 		{
 		}
@@ -16,7 +16,6 @@ namespace Fame.Parser
 		public void BeginDocument()
 		{
 			// TODO Auto-generated method stub
-
 		}
 
 		public void BeginElement(string name)
@@ -26,7 +25,6 @@ namespace Fame.Parser
 		public void Directive(string name, params string[] parameters)
 		{
 			// TODO Auto-generated method stub
-
 		}
 
 		public void EndAttribute(string name)
@@ -36,7 +34,6 @@ namespace Fame.Parser
 		public void EndDocument()
 		{
 			// TODO Auto-generated method stub
-
 		}
 
 		public void EndElement(string name)

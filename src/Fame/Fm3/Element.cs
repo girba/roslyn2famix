@@ -61,6 +61,6 @@
             return Fullname;
         }
 
-        public abstract void CheckContraints(Warnings warnings);
+        public abstract void CheckConstraints(Warnings warnings);
     }
 }

@@ -44,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Warnings.cs" />
+    <Compile Include="Dsl\MetamodelBuilder.cs" />
+    <Compile Include="Internal\MetaDescriptionFactory.cs" />
+    <Compile Include="Parser\DebugClient.cs" />
     <Compile Include="FameDescriptionAttribute.cs" />
     <Compile Include="FamePackageAttribute.cs" />
     <Compile Include="FamePropertyAttribute.cs" />
@@ -64,7 +67,9 @@
     <Compile Include="Parser\InputSource.cs" />
     <Compile Include="Parser\IParseClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Dsl\ProtocolChecker.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="Tower.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

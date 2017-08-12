@@ -76,7 +76,7 @@ namespace Fame
 		/// and the meta-layer are initially empty, whereas the topmost layer is
 		/// initialized with a new FM3 package.
 		/// </summary>
-		public Repository() : this(new MetaRepository(MetaRepository.CreateFm3()))
+		public Repository() : this(new MetaRepository(MetaRepository.CreateFM3()))
 		{
 		}
 
@@ -127,7 +127,7 @@ namespace Fame
 			return _elements.OfType<T>().ToArray();
 		}
 
-		public void Add(object element)
+		public virtual void Add(object element)
 		{
 			Debug.Assert(element != null);
 
@@ -155,7 +155,7 @@ namespace Fame
 								{
 									Add(value);
 								}
-								catch (ClassNotMetadescribedException e)
+								catch (ClassNotMetadescribedException)
 								{
 									throw new ElementInPropertyNotMetadescribed(property);
 								}
@@ -172,16 +172,16 @@ namespace Fame
 			{
 				return _metamodel.GetDescription(element.GetType());
 			}
-			catch (ClassNotMetadescribedException e)
+			catch (ClassNotMetadescribedException)
 			{
 				throw new ObjectNotDescribed(element);
 			}
 		}
 
-		/**
-  * Exports all elements as MSE-formatted string.
-  * 
-  */
+		/// <summary>
+		/// Exports all elements as MSE-formatted string.
+		/// </summary>
+		/// <returns></returns>
 		public string ExportMSE()
 		{
 			StringBuilder stream = new StringBuilder();

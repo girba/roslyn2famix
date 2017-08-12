@@ -82,7 +82,7 @@
             return Type.IsPrimitive();
         }
 
-        public override void CheckContraints(Warnings warnings)
+        public override void CheckConstraints(Warnings warnings)
         {
             // TODO
             //if (isContainer)
