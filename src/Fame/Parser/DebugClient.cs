@@ -5,6 +5,13 @@ namespace Fame.Parser
 	public class DebugClient : IParseClient
 	{
 		// TODO
+
+
+		public DebugClient() : this(null)
+		{
+			throw new NotImplementedException();
+		}
+
 		public DebugClient(IParseClient client)
 		{
 			throw new NotImplementedException();

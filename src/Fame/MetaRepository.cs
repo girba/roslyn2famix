@@ -89,8 +89,8 @@ namespace Fame
 
 	    public static bool IsValidName(string name)
 	    {
-		    return !string.IsNullOrEmpty(name) && char.IsLetter(name[0]); // && isAlphanumeric(string); //TODO
-	    }
+		    return !string.IsNullOrEmpty(name) && char.IsLetter(name[0]); // && isAlphanumeric(string); //TODO: see utils
+		}
 
 		public MetaRepository() : this (CreateFM3())
 	    {
@@ -189,23 +189,40 @@ namespace Fame
 
 	    private MetaDescription LookupPrimitive(Type jclass)
 	    {
-			// TODO: How to port to C#?
-		    //if (jclass.isPrimitive())
-		    //{
-			   // return Boolean.TYPE == jclass
-				  //  ? MetaDescription.BOOLEAN
-				  //  : MetaDescription.NUMBER;
-		    //}
-		    //if (Number.class.isAssignableFrom(jclass)) return MetaDescription.NUMBER;
-		    //if (Boolean.class == jclass) return MetaDescription.BOOLEAN;
-		    //if (String.class == jclass) return MetaDescription.STRING;
-		    //if (char[].class == jclass) return MetaDescription.STRING;
-		    //if (Object.class == jclass) return MetaDescription.OBJECT;
+		    if (jclass.IsPrimitive)
+		    {
+			    return typeof(bool) == jclass ? MetaDescription.BOOLEAN : MetaDescription.NUMBER;
+		    }
+
+		    if (jclass.IsNumber())
+		    {
+			    return MetaDescription.NUMBER;
+		    }
+
+		    if (typeof(bool) == jclass)
+		    {
+			    return MetaDescription.BOOLEAN;
+		    }
+
+		    if (typeof(string) == jclass)
+		    {
+			    return MetaDescription.STRING;
+		    }
+
+		    if (typeof(char[]) == jclass)
+		    {
+			    return MetaDescription.STRING;
+		    }
+
+		    if (typeof(object) == jclass)
+		    {
+			    return MetaDescription.OBJECT;
+		    }
 
 		    return null;
-	    }
+		}
 
-	    public PackageDescription InitializePackageNamed(string name)
+		public PackageDescription InitializePackageNamed(string name)
 	    {
 		    PackageDescription description = this.Get<PackageDescription>(name);
 		    if (description == null)
@@ -295,5 +312,5 @@ namespace Fame
 	    {
 		    return (T)bindings[fullname];
 	    }
-	}
+    }
 }

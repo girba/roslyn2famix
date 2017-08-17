@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ObjectExtensions.cs" />
     <Compile Include="Common\Warnings.cs" />
     <Compile Include="Dsl\MetamodelBuilder.cs" />
     <Compile Include="Internal\MetaDescriptionFactory.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Dsl\ProtocolChecker.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Tower.cs" />
+    <Compile Include="Common\TypeExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

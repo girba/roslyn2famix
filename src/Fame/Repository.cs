@@ -16,6 +16,10 @@
 //  along with 'Fame (for Java)'. If not, see <http://www.gnu.org/licenses/>.
 
 
+using System.Threading;
+using System.Threading.Tasks;
+using Fame.Common;
+
 namespace Fame
 {
 	using System.Collections.Generic;
@@ -95,9 +99,8 @@ namespace Fame
 
 		public void Accept(IParseClient visitor)
 		{
-			// TODO: Runnable --> runs async (ThreadStart)
-			//Runnable runner = new RepositoryVisitor(this, visitor);
-			//runner.run();
+			var runner = new RepositoryVisitor(this, visitor);
+			Task.Run((Action) runner.Run);
 		}
 
 		public void Add(object element, params object[] more)
@@ -143,13 +146,12 @@ namespace Fame
 					if (!property.IsPrimitive())
 					{
 						bool isRoot = property.Type.IsRoot();
-						foreach (Element value in property.ReadAll(element))
+
+						foreach (object value in property.ReadAll(element))
 						{
 							Debug.Assert(value != null, property.Fullname);
-							if (!(isRoot &&
-								  (value.Name == "String" ||     // TODO: Check if correct
-								  value.Name == "Boolean" ||
-								  value.Name == "Number")))
+
+							if (!(isRoot && (value is string || value is bool || value.IsNumber())))
 							{
 								try
 								{
