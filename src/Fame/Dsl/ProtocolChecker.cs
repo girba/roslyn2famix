@@ -1,75 +1,148 @@
-using System;
-using Fame.Parser;
-
 namespace Fame.Dsl
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Diagnostics;
+	using System.Linq;
+	using Parser;
+
 	public class ProtocolChecker : IParseClient
 	{
-		// TODO
+		private readonly LinkedList<string> _stack = new LinkedList<string>();
+		private State[] _expectedState = { State.BeginDocument, State.Directive };
+
+		public enum State
+		{
+			Directive,
+
+			BeginDocument,
+			EndDocument,
+
+			BeginElement,
+			EndElement,
+
+			BeginAttribute,
+			EndAttribute,
+
+			Reference,
+			Primitive,
+
+			Serial
+		}
+
+		public IParseClient Client;
 
 		public ProtocolChecker(IParseClient client)
 		{
-			throw new NotImplementedException();
+			Client = client;
 		}
 
 		public void BeginAttribute(string name)
 		{
-			throw new NotImplementedException();
+			_stack.AddLast(name);
+			CheckState(State.BeginAttribute);
+			ExpectState(State.BeginElement, State.EndAttribute, State.Primitive, State.Reference);
+			Client.BeginAttribute(name);
+		}
+
+		private void CheckState(State state)
+		{
+			if (_expectedState.Any(each => each == state))
+				return;
+
+			Debug.Assert(false, "Expected " + _expectedState + " but was " + state);
 		}
 
 		public void BeginDocument()
 		{
-			throw new NotImplementedException();
+			CheckState(State.BeginDocument);
+			ExpectState(State.BeginElement, State.EndDocument);
+			Client.BeginDocument();
+		}
+
+		private void ExpectState(params State[] states)
+		{
+			_expectedState = states;
 		}
 
 		public void BeginElement(string name)
 		{
-			throw new NotImplementedException();
+			_stack.AddLast(name);
+			CheckState(State.BeginElement);
+			ExpectState(State.BeginAttribute, State.Serial, State.EndElement);
+			Client.BeginElement(name);
 		}
 
-		public void Directive(string name, params string[] parameters)
+		public void Directive(string name, params string[] @params)
 		{
-			throw new NotImplementedException();
+			CheckState(State.Directive);
+			ExpectState(State.BeginDocument, State.Directive);
+			Client.Directive(name, @params);
 		}
 
 		public void EndAttribute(string name)
 		{
-			throw new NotImplementedException();
+			Debug.Assert(name.Equals(_stack.Last.Value));
+			_stack.RemoveLast();
+			CheckState(State.EndAttribute);
+			ExpectState(State.BeginAttribute, State.EndElement);
+			Client.EndAttribute(name);
 		}
 
 		public void EndDocument()
 		{
-			throw new NotImplementedException();
+			CheckState(State.EndDocument);
+			ExpectState();
+			Client.EndDocument();
 		}
 
 		public void EndElement(string name)
 		{
-			throw new NotImplementedException();
+			Debug.Assert(name.Equals(_stack.Last.Value));
+
+			_stack.RemoveLast();
+			CheckState(State.EndElement);
+
+			if (_stack.Count == 0)
+				ExpectState(State.BeginElement, State.EndDocument);
+			else
+				ExpectState(State.BeginElement, State.EndAttribute, State.Primitive, State.Reference);
+
+			Client.EndElement(name);
 		}
 
 		public void Primitive(object value)
 		{
-			throw new NotImplementedException();
+			CheckState(State.Primitive);
+			ExpectState(State.BeginElement, State.EndAttribute, State.Primitive, State.Reference);
+			Client.Primitive(value);
 		}
 
 		public void Reference(int index)
 		{
-			throw new NotImplementedException();
+			CheckState(State.Reference);
+			ExpectState(State.BeginElement, State.EndAttribute, State.Primitive, State.Reference);
+			Client.Reference(index);
 		}
 
 		public void Reference(string name)
 		{
-			throw new NotImplementedException();
+			CheckState(State.Reference);
+			ExpectState(State.BeginElement, State.EndAttribute, State.Primitive, State.Reference);
+			Client.Reference(name);
 		}
 
 		public void Reference(string name, int index)
 		{
+			//throw new AssertionError("Not yet implemented!");
 			throw new NotImplementedException();
 		}
 
 		public void Serial(int index)
 		{
-			throw new NotImplementedException();
+			CheckState(State.Serial);
+			ExpectState(State.BeginAttribute, State.EndElement);
+			Client.Serial(index);
 		}
 	}
 }
