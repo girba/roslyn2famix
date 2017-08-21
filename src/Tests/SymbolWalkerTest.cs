@@ -59,7 +59,7 @@
             // Assert
             var parsedFamix = builderUnderTest.ToFamixString();
 
-            Assert.Equal(parsedFamix, expectedFamix);
+            Assert.Equal(expectedFamix, parsedFamix);
         }
     }
 }
