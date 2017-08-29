@@ -186,7 +186,7 @@ namespace Fame
 		/// <returns></returns>
 		public string ExportMSE()
 		{
-			StringBuilder stream = new StringBuilder();
+			StringWriter stream = new StringWriter();
 			this.ExportMSE(stream);
 			return stream.ToString();
 		}
@@ -215,10 +215,10 @@ namespace Fame
 
 		public void ExportMSEFile(string filename)
 		{
-			Accept(new MSEPrinter(File.OpenWrite(filename)));
+			Accept(new MSEPrinter(File.CreateText(filename)));
 		}
 
-		public void ExportMSE(StringBuilder stream)
+		public void ExportMSE(TextWriter stream)
 		{
 			Accept(new MSEPrinter(stream));
 		}
