@@ -84,32 +84,44 @@
 
         public override void CheckConstraints(Warnings warnings)
         {
-            // TODO
-            //if (isContainer)
-            //    if (isMultivalued)
-            //    {
-            //        warnings.add("Container must be single-values", this);
-            //    }
-            //if (opposite != null)
-            //    if (this != opposite.getOpposite())
-            //    {
-            //        warnings.add("Opposites must match", this);
-            //    }
-            //if (!MetaRepository.isValidName(getName()))
-            //{
-            //    warnings.add("Name must be alphanumeric", this);
-            //}
-            //if (!Character.isLowerCase(getName().charAt(0)))
-            //{
-            //    warnings.add("Name should start lowerCase", this);
-            //}
-            //if (type == null)
-            //    warnings.add("Missing type", this);
-            //if (declaringClass == null)
-            //    warnings.add("Must have an owning class", this);
-        }
+	        if (IsContainer)
+	        {
+		        if (IsMultivalued)
+		        {
+			        warnings.Add("Container must be single-values", this);
+		        }
+	        }
 
-        public void SetComposite(bool composite)
+	        if (Opposite != null)
+	        {
+		        if (this != Opposite.Opposite)
+		        {
+			        warnings.Add("Opposites must match", this);
+		        }
+	        }
+
+	        if (!MetaRepository.IsValidName(Name))
+	        {
+		        warnings.Add("Name must be alphanumeric", this);
+	        }
+
+	        if (!char.IsLower(Name[0]))
+	        {
+		        warnings.Add("Name should start lowerCase", this);
+	        }
+
+	        if (Type == null)
+	        {
+		        warnings.Add("Missing type", this);
+	        }
+
+	        if (_declaringClass == null)
+	        {
+		        warnings.Add("Must have an owning class", this);
+	        }
+		}
+
+		public void SetComposite(bool composite)
         {
             Debug.Assert(Opposite != null);
             Opposite.IsContainer = composite;
@@ -213,42 +225,27 @@
         }
     }
 
-    public class ReadingPropertyFailed : AssertionError
-    {
-        private static readonly long serialVersionUID = 6381545746042993261L;
-        public PropertyDescription Property;
-        public object Object;
+	public class ReadingPropertyFailed : AssertionError
+	{
+		private static readonly long serialVersionUID = 6381545746042993261L;
+		public PropertyDescription Property;
+		public object Object;
 
-        public ReadingPropertyFailed(Exception e, PropertyDescription property, object @object) : base(e)
-        {
-            Property = property;
-            Object = @object;
-        }
-    }
+		public ReadingPropertyFailed(Exception e, PropertyDescription property, object @object) : base(e)
+		{
+			Property = property;
+			Object = @object;
+		}
+	}
 
-    public class AssertionError : Exception
-    {
-	    public AssertionError()
-	    {
-		    
-	    }
+	public class NoAccessorException : Exception
+	{
+		private static readonly long serialVersionUID = -2828241533257508153L;
 
-        protected AssertionError(Exception e)
-        {
-            // TODO
-            throw new NotImplementedException();
-        }
-    }
-
-    public class NoAccessorException : Exception
-    {
-        private static readonly long serialVersionUID = -2828241533257508153L;
-
-        public PropertyDescription Outer()
-        {
-            // TODO
-            //return PropertyDescription.this;
-            throw new NotImplementedException();
-        }
-    }
+		// TODO
+		//public PropertyDescription Outer()
+		//{
+			//return PropertyDescription.this;
+		//}
+	}
 }

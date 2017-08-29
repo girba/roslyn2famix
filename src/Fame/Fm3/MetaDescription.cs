@@ -2,7 +2,8 @@ namespace Fame.Fm3
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Diagnostics;
+	using System.Linq;
     using Common;
 
     /// <summary>
@@ -188,9 +189,9 @@ namespace Fame.Fm3
             }
             else
             {
-                //Assert nestingPackage == null;
-                //Assert superclass == null;
-                //Assert attributes.isEmpty();
+				Debug.Assert(_nestingPackage == null);
+				Debug.Assert(SuperClass == null);
+				Debug.Assert(!Attributes.Any());
             }
 
             var set = new HashSet<MetaDescription>();
@@ -216,8 +217,8 @@ namespace Fame.Fm3
 
         public object NewInstance()
         {
-            try
-            {
+			try
+			{
                 return Activator.CreateInstance(BaseClass);
             }
             catch (Exception)

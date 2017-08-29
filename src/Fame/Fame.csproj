@@ -47,6 +47,7 @@
     <Compile Include="Common\Warnings.cs" />
     <Compile Include="Dsl\MetamodelBuilder.cs" />
     <Compile Include="Dsl\ModelBuilder.cs" />
+    <Compile Include="Common\AssertionError.cs" />
     <Compile Include="Internal\MetaDescriptionFactory.cs" />
     <Compile Include="Parser\DebugClient.cs" />
     <Compile Include="FameDescriptionAttribute.cs" />

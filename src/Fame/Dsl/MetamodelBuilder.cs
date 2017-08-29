@@ -1,7 +1,6 @@
-using System;
-
 namespace Fame.Dsl
 {
+	using System;
 	using System.Collections.Generic;
 	using System.Diagnostics;
 	using Fm3;

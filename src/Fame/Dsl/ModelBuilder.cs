@@ -1,4 +1,6 @@
-﻿namespace Fame.Dsl
+﻿using System.IO;
+
+namespace Fame.Dsl
 {
 	using System;
 	using System.Text;
@@ -202,8 +204,7 @@
 		{
 			// TODO: Verify correctness
 			IParseClient pc = new DebugClient();
-			var sb = new StringBuilder();
-			pc = new MSEPrinter(sb);
+			pc = new MSEPrinter(Console.Out);
 
 			var attr0 = new ModelBuilder(pc)
 				.BeginDocument()
@@ -263,7 +264,7 @@
 			//							.With("type").Reference("Number")
 			//	.EndDocument();
 
-			Console.WriteLine(sb.ToString());
+			Console.WriteLine(pc);
 		}
 	}
 }

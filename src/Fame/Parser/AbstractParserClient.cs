@@ -9,56 +9,55 @@
 	{
 		// TODO
 
-		public void BeginAttribute(string name)
+		public virtual void BeginAttribute(string name)
 		{
 		}
 
-		public void BeginDocument()
-		{
-			// TODO Auto-generated method stub
-		}
-
-		public void BeginElement(string name)
-		{
-		}
-
-		public void Directive(string name, params string[] parameters)
+		public virtual void BeginDocument()
 		{
 			// TODO Auto-generated method stub
 		}
 
-		public void EndAttribute(string name)
+		public virtual void BeginElement(string name)
 		{
 		}
 
-		public void EndDocument()
+		public virtual void Directive(string name, params string[] parameters)
+		{
+			// TODO Auto-generated method stub
+		}
+
+		public virtual void EndAttribute(string name)
+		{
+		}
+
+		public virtual void EndDocument()
 		{
 			// TODO Auto-generated method stub
 		}
 
-		public void EndElement(string name)
+		public virtual void EndElement(string name)
 		{
 		}
 
-		public void Primitive(object value)
+		public virtual void Primitive(object value)
 		{
 		}
 
-		public void Reference(int index)
+		public virtual void Reference(int index)
 		{
 		}
 
-		public void Reference(string name)
+		public virtual void Reference(string name)
 		{
 		}
 
-		public void Reference(string name, int index)
+		public virtual void Reference(string name, int index)
 		{
 			// TODO Auto-generated method stub
-
 		}
 
-		public void Serial(int index)
+		public virtual void Serial(int index)
 		{
 		}
 	}
