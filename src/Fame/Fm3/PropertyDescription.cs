@@ -187,7 +187,7 @@
                     Debug.Assert(values.Count <= 1, values + " for " + Fullname);
                     foreach (T first in values)
                     {
-                        Access.Write<T>(element, first);
+                        Access.Write(element, first);
                         return;
                     }
                 }
@@ -200,11 +200,11 @@
     }
 
     // TODO: Why is this required? Look like in C# it is not necessary.
-    public class ArrayWrapper<T,TE> : Collection<T>, IEnumerable where TE : ICollection<T>
+    public class ArrayWrapper<T, TCollection> : Collection<T>, IEnumerable where TCollection : ICollection<T>
     {
-        public readonly TE Array;
+        public readonly TCollection Array;
 
-        public ArrayWrapper(TE array)
+        public ArrayWrapper(TCollection array)
         {
             Array = array;
         }

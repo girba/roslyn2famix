@@ -8,9 +8,8 @@
 		{
 		}
 
-		protected AssertionError(Exception e)
+		public AssertionError(Exception ex) : base (string.Empty, ex)
 		{
-			// TODO
 		}
 	}
 }
