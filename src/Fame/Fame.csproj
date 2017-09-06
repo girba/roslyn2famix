@@ -71,6 +71,7 @@
     <Compile Include="Parser\Importer.cs" />
     <Compile Include="Parser\InputSource.cs" />
     <Compile Include="Parser\IParseClient.cs" />
+    <Compile Include="Parser\Parser.cs" />
     <Compile Include="Parser\ParserError.cs" />
     <Compile Include="Parser\Position.cs" />
     <Compile Include="Parser\Primitive.cs" />

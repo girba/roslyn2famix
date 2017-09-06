@@ -6,6 +6,7 @@
 	using System.Diagnostics;
 	using System.IO;
 	using System.Linq;
+
 	using Fm3;
 	using Parser;
 
@@ -186,7 +187,7 @@
 
 		public override void Primitive(object value)
 		{
-			_stack.Last.Value.AttributeElementsAdd(Parser.Primitive.ValueOf(value));
+			_stack.Last.Value.AttributeElementsAdd(Fame.Parser.Primitive.ValueOf(value));
 		}
 
 		public override void Reference(int index)
