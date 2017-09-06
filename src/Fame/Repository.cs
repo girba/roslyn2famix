@@ -205,7 +205,7 @@ namespace Fame
 
 		public void ImportMSE(string content)
 		{
-			ImportMSE(InputSource.FromString(content));
+			ImportMSE(InputSource.FromString(content.ToCharArray()));
 		}
 
 		public void ImportMSE(Stream stream)

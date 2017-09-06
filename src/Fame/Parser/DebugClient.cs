@@ -1,80 +1,119 @@
 namespace Fame.Parser
 {
-	using System;
+	using System.Collections.Generic;
+	using System.Text;
 
 	public class DebugClient : IParseClient
 	{
-		// TODO
-
-
-		public DebugClient() : this(null)
-		{
-			throw new NotImplementedException();
-		}
+		public readonly IList<object[]> Log = new List<object[]>();
+		public IParseClient Client;
 
 		public DebugClient(IParseClient client)
 		{
-			throw new NotImplementedException();
+			Client = client;
+		}
+
+		public DebugClient() : this(null)
+		{
 		}
 
 		public void BeginAttribute(string name)
 		{
-			throw new NotImplementedException();
+			Log.Add(new object[] { "beginAttribute", name });
+
+			Client?.BeginAttribute(name);
 		}
 
 		public void BeginDocument()
 		{
-			throw new NotImplementedException();
+			Log.Add(new object[] { "beginDocument" });
+
+			Client?.BeginDocument();
 		}
 
 		public void BeginElement(string name)
 		{
-			throw new NotImplementedException();
+			Log.Add(new object[] { "beginElement", name });
+
+			Client?.BeginElement(name);
 		}
 
-		public void Directive(string name, params string[] parameters)
+		public void Directive(string name, params string[] @params)
 		{
-			throw new NotImplementedException();
+			throw new System.NotSupportedException();
 		}
 
 		public void EndAttribute(string name)
 		{
-			throw new NotImplementedException();
+			Log.Add(new object[] { "endAttribute", name });
+
+			Client?.EndAttribute(name);
 		}
 
 		public void EndDocument()
 		{
-			throw new NotImplementedException();
+			Log.Add(new object[] { "endDocument" });
+
+			Client?.EndDocument();
 		}
 
 		public void EndElement(string name)
 		{
-			throw new NotImplementedException();
+			Log.Add(new object[] { "endElement", name });
+
+			Client?.EndElement(name);
 		}
 
-		public void Primitive(object value)
+		public virtual void Primitive(object value)
 		{
-			throw new NotImplementedException();
+			Log.Add(new[] { "primitive", value });
+
+			Client?.Primitive(value);
 		}
 
 		public void Reference(int index)
 		{
-			throw new NotImplementedException();
+			Log.Add(new object[] { "reference(int)", index });
+
+			Client?.Reference(index);
 		}
 
 		public void Reference(string name)
 		{
-			throw new NotImplementedException();
+			Log.Add(new object[] { "reference(String)", name });
+
+			Client?.Reference(name);
 		}
 
 		public void Reference(string name, int index)
 		{
-			throw new NotImplementedException();
+			throw new System.NotSupportedException();
 		}
 
 		public void Serial(int index)
 		{
-			throw new NotImplementedException();
+			Log.Add(new object[] { "serial", index });
+
+			Client?.Serial(index);
+		}
+
+		public override string ToString()
+		{
+			StringBuilder sb = new StringBuilder();
+
+			foreach (object[] line in Log)
+			{
+				var s = ", ";
+
+				foreach (object each in line)
+				{
+					sb.Append(s).Append(each);
+				}
+
+				sb.Append('\n');
+			}
+
+			return sb.ToString();
 		}
 	}
 }

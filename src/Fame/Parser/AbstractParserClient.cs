@@ -7,8 +7,6 @@
 	/// </summary>
 	public class AbstractParserClient : IParseClient
 	{
-		// TODO
-
 		public virtual void BeginAttribute(string name)
 		{
 		}
