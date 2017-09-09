@@ -195,7 +195,7 @@ namespace Fame
 		{
 			Importer importer = new Importer(GetMetamodel());
 			importer.ReadFrom(input);
-			AddAll(importer.GetResult().GetElements());
+			AddAll(importer.Result.GetElements());
 		}
 
 		public void ImportMSEFile(string name)
