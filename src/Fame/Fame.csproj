@@ -44,13 +44,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ObjectExtensions.cs" />
-    <Compile Include="Common\Warnings.cs" />
     <Compile Include="Dsl\MetamodelBuilder.cs" />
     <Compile Include="Dsl\ModelBuilder.cs" />
     <Compile Include="Common\AssertionError.cs" />
+    <Compile Include="Common\AbstractCollection.cs" />
     <Compile Include="Internal\FieldAccess.cs" />
     <Compile Include="Internal\Inferencer.cs" />
     <Compile Include="Internal\MetaDescriptionFactory.cs" />
+    <Compile Include="Internal\MultivalueSet.cs" />
+    <Compile Include="Internal\RuntimeElement.cs" />
+    <Compile Include="Internal\Warnings.cs" />
     <Compile Include="Parser\DebugClient.cs" />
     <Compile Include="FameDescriptionAttribute.cs" />
     <Compile Include="FamePackageAttribute.cs" />

@@ -1,29 +1,29 @@
 ﻿namespace Fame.Fm3
 {
     using System.Collections.Generic;
-    using Common;
+    using Internal;
 
-    /// <summary>
-    /// Holds meta-information about packaging.
-    /// <p> 
-    /// subclasses NamedElement with attributes 
-    /// </p> 
-    /// <ul> 
-    /// <li>Class<code> classes</code>(multivalued, opposite Class.package)</li> 
-    /// <li>Property<code> extensions</code>(multivalued, opposite Property.package)
-    /// </li> 
-    /// </ul> 
-    /// <p> 
-    /// with these constraints
-    /// </p> 
-    /// <ul> 
-    /// <li> <code>owner</code> is nil</li> 
-    /// <li> <code>classes</code> must have unique names</li> 
-    /// </ul> 
-    ///  
-    /// @author Adrian Kuhn
-    /// </summary>
-    [FamePackage("FM3")]
+	/// <summary>
+	/// Holds meta-information about packaging.
+	/// <p> 
+	/// subclasses NamedElement with attributes 
+	/// </p> 
+	/// <ul> 
+	/// <li>Class<code> classes</code>(multivalued, opposite Class.package)</li> 
+	/// <li>Property<code> extensions</code>(multivalued, opposite Property.package)
+	/// </li> 
+	/// </ul> 
+	/// <p> 
+	/// with these constraints
+	/// </p> 
+	/// <ul> 
+	/// <li> <code>owner</code> is nil</li> 
+	/// <li> <code>classes</code> must have unique names</li> 
+	/// </ul> 
+	///  
+	/// @author Adrian Kuhn
+	/// </summary>
+	[FamePackage("FM3")]
     [FameDescription("Package")]
     public class PackageDescription : Element
     {

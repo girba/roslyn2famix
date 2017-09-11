@@ -4,56 +4,57 @@ namespace Fame.Fm3
     using System.Collections.Generic;
     using System.Diagnostics;
 	using System.Linq;
-    using Common;
+    using Internal;
 
-    /// <summary>
-    /// 
-    /// Holds meta-information of classes.
-    /// <p>
-    /// This subclasses NamedElement with attributes
-    /// </p>
-    /// <ul>
-    /// <li>Boolean <code>abstract</code></li>
-    /// <li>Boolean <code>primitive</code> (derived)</li>
-    /// <li>Boolean <code>root</code> (derived)</li>
-    /// <li>Class <code>superclass</code></li>
-    /// <li>Package <code>package</code> (container, opposite Package.classes)</li>
-    /// <li>Property <code>allAttributes</code> (derived, multivalued)</li>
-    /// <li>Property <code>attributes</code> (multivalued, opposite Property.class)</li>
-    /// </ul>
-    /// <p>
-    /// with these reserved instances
-    /// </p>
-    /// 
-    /// pre>
-    ///  OBJECT = (MSE.Class (name 'Object') (root true))
-    ///  BOOLEAN = (MSE.Class (name 'Boolean') (primitive true)) 
-    ///  NUMBER = (MSE.Class (name 'Number') (primitive true)) 
-    ///  STRING = (MSE.Class (name 'String') (primitive true))
-    /// /pre>
-    /// 
-    /// <p>
-    /// for any other instance, these constraints apply
-    /// </p>
-    /// <ul>
-    /// <li> <code>owner</code> is derived from <code>package</code></li>
-    /// <li> <code>superclass</code> is not nil</li>
-    /// <li> <code>superclass</code> must not be a primitive</li>
-    /// <li> <code>superclass</code> chain may not include cycles</li>
-    /// <li> <code>package</code> must not be nil</li>
-    /// <li> <code>allAttributes</code> is derived as union of <code>attributes</code>
-    /// and <code>superclass.allAttributes</code></li>
-    /// <li>only one of <code>allAttributes</code> may have
-    /// <code>container = true</code></li>
-    /// <li> <code>allAttributes</code> must have unique names</li>
-    /// <li>in particular, none of <code>attributes</code> may have the name of any
-    /// of <code>superclass.allAttributes</code></li>
-    /// </ul>
-    /// 
-    /// @author Adrian Kuhn
-    /// 
-    /// </summary>
-    [FamePackage("FM3")]
+
+	/// <summary>
+	/// 
+	/// Holds meta-information of classes.
+	/// <p>
+	/// This subclasses NamedElement with attributes
+	/// </p>
+	/// <ul>
+	/// <li>Boolean <code>abstract</code></li>
+	/// <li>Boolean <code>primitive</code> (derived)</li>
+	/// <li>Boolean <code>root</code> (derived)</li>
+	/// <li>Class <code>superclass</code></li>
+	/// <li>Package <code>package</code> (container, opposite Package.classes)</li>
+	/// <li>Property <code>allAttributes</code> (derived, multivalued)</li>
+	/// <li>Property <code>attributes</code> (multivalued, opposite Property.class)</li>
+	/// </ul>
+	/// <p>
+	/// with these reserved instances
+	/// </p>
+	/// 
+	/// pre>
+	///  OBJECT = (MSE.Class (name 'Object') (root true))
+	///  BOOLEAN = (MSE.Class (name 'Boolean') (primitive true)) 
+	///  NUMBER = (MSE.Class (name 'Number') (primitive true)) 
+	///  STRING = (MSE.Class (name 'String') (primitive true))
+	/// /pre>
+	/// 
+	/// <p>
+	/// for any other instance, these constraints apply
+	/// </p>
+	/// <ul>
+	/// <li> <code>owner</code> is derived from <code>package</code></li>
+	/// <li> <code>superclass</code> is not nil</li>
+	/// <li> <code>superclass</code> must not be a primitive</li>
+	/// <li> <code>superclass</code> chain may not include cycles</li>
+	/// <li> <code>package</code> must not be nil</li>
+	/// <li> <code>allAttributes</code> is derived as union of <code>attributes</code>
+	/// and <code>superclass.allAttributes</code></li>
+	/// <li>only one of <code>allAttributes</code> may have
+	/// <code>container = true</code></li>
+	/// <li> <code>allAttributes</code> must have unique names</li>
+	/// <li>in particular, none of <code>attributes</code> may have the name of any
+	/// of <code>superclass.allAttributes</code></li>
+	/// </ul>
+	/// 
+	/// @author Adrian Kuhn
+	/// 
+	/// </summary>
+	[FamePackage("FM3")]
     [FameDescription("Class")]
     public class MetaDescription : Element
     {
