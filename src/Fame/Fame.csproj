@@ -51,7 +51,10 @@
     <Compile Include="Internal\FieldAccess.cs" />
     <Compile Include="Internal\Inferencer.cs" />
     <Compile Include="Internal\MetaDescriptionFactory.cs" />
+    <Compile Include="Internal\MethodAccess.cs" />
     <Compile Include="Internal\MultivalueSet.cs" />
+    <Compile Include="Internal\PropertyBuilder.cs" />
+    <Compile Include="Internal\PropertyFactory.cs" />
     <Compile Include="Internal\RuntimeElement.cs" />
     <Compile Include="Internal\Warnings.cs" />
     <Compile Include="Parser\DebugClient.cs" />

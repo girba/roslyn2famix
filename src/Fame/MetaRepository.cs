@@ -29,24 +29,24 @@ namespace Fame
 	using Parser;
 	using Fm3;
 
+	/// <inheritdoc />
 	/// <summary>
 	/// A meta-model (ie elements conforming to FM3).
-	/// 
 	/// </summary>
 	public class MetaRepository : Repository
     {
-	    private Dictionary<string, Element> bindings;
-	    private Dictionary<Type, MetaDescription> classes;
-	    private bool immutable;
+	    private readonly Dictionary<string, Element> _bindings;
+	    private readonly Dictionary<Type, MetaDescription> _classes;
+	    private bool _immutable;
 
-		public static MetaRepository CreateFM3()
+		public static MetaRepository CreateFm3()
 	    {
 		    MetaRepository mse = new MetaRepository(null);
 		    mse.With(typeof(MetaDescription));
 		    mse.With(typeof(Element));
 		    mse.With(typeof(PackageDescription));
 		    mse.With(typeof(PropertyDescription));
-		    mse.AddAll(mse.bindings.Values.ToArray());
+		    mse.AddAll(mse._bindings.Values.ToArray());
 		    mse.SetImmutable();
 
 		    return mse;
@@ -92,19 +92,19 @@ namespace Fame
 		    return !string.IsNullOrEmpty(name) && char.IsLetter(name[0]); // && isAlphanumeric(string); //TODO: see utils
 		}
 
-		public MetaRepository() : this (CreateFM3())
+		public MetaRepository() : this (CreateFm3())
 	    {
 	    }
 
 	    public MetaRepository(MetaRepository metamodel) : base(metamodel)
 	    {
-		    classes = new Dictionary<Type, MetaDescription>();
-		    bindings = new Dictionary<string, Element>();
+		    _classes = new Dictionary<Type, MetaDescription>();
+		    _bindings = new Dictionary<string, Element>();
 	    }
 
 	    public override void Add(object element)
 	    {
-			Debug.Assert(!immutable);
+			Debug.Assert(!_immutable);
 			Debug.Assert(element is Element, element.GetType().ToString());
 			if (element is MetaDescription)
 			{
@@ -113,12 +113,12 @@ namespace Fame
 			}
 
 			base.Add(element);
-			bindings.Add(((Element)element).Fullname, (Element)element);
+			_bindings.Add(((Element)element).Fullname, (Element)element);
 		}
 
 	    public void AddClassDescription(Type cls, MetaDescription desc)
 	    {
-		    classes.Add(cls, desc);
+		    _classes.Add(cls, desc);
 	    }
 
 	    public ICollection<MetaDescription> AllClassDescriptions()
@@ -157,7 +157,7 @@ namespace Fame
 
 	    public MetaDescription DescriptionNamed(string fullname)
 	    {
-		    object found = this.Get<Element>(fullname);
+		    object found = Get<Element>(fullname);
 		    if (found is MetaDescription)
 				return (MetaDescription)found;
 
@@ -224,11 +224,11 @@ namespace Fame
 
 		public PackageDescription InitializePackageNamed(string name)
 	    {
-		    PackageDescription description = this.Get<PackageDescription>(name);
+		    PackageDescription description = Get<PackageDescription>(name);
 		    if (description == null)
 		    {
 			    description = new PackageDescription(name);
-			    bindings.Add(name, description);
+			    _bindings.Add(name, description);
 		    }
 
 		    return description;
@@ -241,7 +241,7 @@ namespace Fame
 
 	    private MetaDescription LookupClass(Type jclass)
 	    {
-		    return classes[jclass];
+		    return _classes[jclass];
 	    }
 
 	    private MetaDescription LookupFull(Type jclass)
@@ -254,7 +254,7 @@ namespace Fame
 
 	    public void SetImmutable()
 	    {
-		    immutable = true;
+		    _immutable = true;
 	    }
 
 		/// <summary>
@@ -270,22 +270,22 @@ namespace Fame
 		/// <param name="jclass">an annotated C#-class</param>
 		public void With(Type jclass)
 	    {
-		    MetaDescription m = this.LookupFull(jclass);
+		    MetaDescription m = LookupFull(jclass);
 		    if (m == null)
 			{
 			    MetaDescriptionFactory factory = new MetaDescriptionFactory(jclass, this);
-			    if (factory.IsAnnotationPresent())
+			    if (factory.AnnotationPresent)
 			    {
 				    m = factory.CreateInstance();
-				    this.classes.Add(jclass, m);
+				    _classes.Add(jclass, m);
 				    factory.InitializeInstance();
-				    this.bindings.Add(m.Fullname, m);
+				    _bindings.Add(m.Fullname, m);
 			    }
 
-			    if (!this.IsSelfDescribed())
+			    if (!IsSelfDescribed())
 			    { 
 					// TODO explain? breaks meta-loop!
-				    this.Add(m);
+				    Add(m);
 			    }
 		    }
 
@@ -304,13 +304,13 @@ namespace Fame
 	    {
 		    foreach (Type jclass in jclasses)
 		    {
-			    this.With(jclass);
+			    With(jclass);
 		    }
 	    }
 
 		public T Get<T>(string fullname) where T : Element
 	    {
-		    return (T)bindings[fullname];
+		    return (T)_bindings[fullname];
 	    }
     }
 }

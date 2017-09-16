@@ -19,7 +19,7 @@
 			Debug.Assert(model.GetMetamodel().Equals(metamodel));
 		}
 
-		public Tower() : this(MetaRepository.CreateFM3(), null, null)
+		public Tower() : this(MetaRepository.CreateFm3(), null, null)
 		{
 		}
 

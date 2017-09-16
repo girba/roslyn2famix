@@ -8,18 +8,18 @@
 	{
 		private class Warn
 		{
-			public readonly string Message;
-			public readonly Element Element;
+			private readonly string _message;
+			private readonly Element _element;
 
 			public Warn(Element element, string message)
 			{
-				Message = message;
-				Element = element;
+				_message = message;
+				_element = element;
 			}
 
 			public override string ToString()
 			{
-				return Message + ": " + Element;
+				return _message + ": " + _element;
 			}
 		}
 

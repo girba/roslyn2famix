@@ -5,11 +5,11 @@
 	using System.IO;
 	using Common;
 
-	public class MSEPrinter : AbstractPrintClient
+	public class MsePrinter : AbstractPrintClient
 	{
-		public static readonly object UNLIMITED = new object();
+		public static readonly object Unlimited = new object();
 
-		public MSEPrinter(TextWriter stream) : base(stream)
+		public MsePrinter(TextWriter stream) : base(stream)
 		{
 		}
 
@@ -57,7 +57,7 @@
 		{
 			Append(' ');
 
-			if (value == UNLIMITED)
+			if (value == Unlimited)
 			{
 				Append('*');
 			}
@@ -86,7 +86,7 @@
 			{				
 				Append(((DateTime)value).ToString("yyyy-MM-dd,hh:mm:ss").ToCharArray());
 			}
-			else if (value is char?)
+			else if (value is char)
 			{
 				Append(("'" + value + "'").ToCharArray());
 			}
@@ -102,44 +102,23 @@
 
 		public override void Reference(int index)
 		{
-			try
-			{
-				Stream.Write(" (ref: "); // must prepend space!
-				Stream.Write(index);
-				Stream.Write(')');
-			}
-			catch (IOException)
-			{
-				throw;
-			}
+			Stream.Write(" (ref: "); // must prepend space!
+			Stream.Write(index);
+			Stream.Write(')');
 		}
 
 		public override void Reference(string name)
 		{
-			try
-			{
-				Stream.Write(" (ref: "); // must prepend space!
-				Stream.Write(name);
-				Stream.Write(')');
-			}
-			catch (IOException ex)
-			{
-				throw;
-			}
+			Stream.Write(" (ref: "); // must prepend space!
+			Stream.Write(name);
+			Stream.Write(')');
 		}
 
 		public override void Serial(int index)
 		{
-			try
-			{
-				Stream.Write(" (id: "); // must prepend space!
-				Stream.Write(Convert.ToString(index));
-				Stream.Write(')');
-			}
-			catch (IOException)
-			{
-				throw;
-			}
+			Stream.Write(" (id: "); // must prepend space!
+			Stream.Write(Convert.ToString(index));
+			Stream.Write(')');
 		}
 	}
 }

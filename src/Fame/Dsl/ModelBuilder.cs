@@ -204,7 +204,7 @@ namespace Fame.Dsl
 		{
 			// TODO: Verify correctness
 			IParseClient pc = new DebugClient();
-			pc = new MSEPrinter(Console.Out);
+			pc = new MsePrinter(Console.Out);
 
 			var attr0 = new ModelBuilder(pc)
 				.BeginDocument()

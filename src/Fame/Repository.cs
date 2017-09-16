@@ -80,7 +80,7 @@ namespace Fame
 		/// and the meta-layer are initially empty, whereas the topmost layer is
 		/// initialized with a new FM3 package.
 		/// </summary>
-		public Repository() : this(new MetaRepository(MetaRepository.CreateFM3()))
+		public Repository() : this(new MetaRepository(MetaRepository.CreateFm3()))
 		{
 		}
 
@@ -215,12 +215,12 @@ namespace Fame
 
 		public void ExportMSEFile(string filename)
 		{
-			Accept(new MSEPrinter(File.CreateText(filename)));
+			Accept(new MsePrinter(File.CreateText(filename)));
 		}
 
 		public void ExportMSE(TextWriter stream)
 		{
-			Accept(new MSEPrinter(stream));
+			Accept(new MsePrinter(stream));
 		}
 
 		public ICollection<object> GetElements()
