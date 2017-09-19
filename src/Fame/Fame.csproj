@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Codegen\JavaFile.cs" />
+    <Compile Include="Codegen\Template.cs" />
     <Compile Include="Common\ObjectExtensions.cs" />
     <Compile Include="Dsl\MetamodelBuilder.cs" />
     <Compile Include="Dsl\ModelBuilder.cs" />
