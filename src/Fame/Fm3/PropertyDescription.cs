@@ -8,7 +8,6 @@
     using Common;
     using Internal;
 
-    //TODO
     [FamePackage("FM3")]
     [FameDescription("Property")]
     public class PropertyDescription : Element
@@ -51,12 +50,10 @@
         [FameProperty(Opposite = "opposite")]
         public PropertyDescription Opposite { get; set; }
 
-
         [FameProperty]
         public MetaDescription Type { get; set; }
 
         public Access Access { private get; set; }
-
 
         public new string Name { get; set; }
 
@@ -138,20 +135,14 @@
             if (Access == null) throw new NoAccessorException();
             Debug.Assert(element != null, "Trying to read property (" + this + ") from null");
 
-            try
-            {
-                if (IsMultivalued)
-                {
-                    return PrivateReadAllMultivalued(element);
-                }
+	        if (IsMultivalued)
+	        {
+		        return PrivateReadAllMultivalued(element);
+	        }
 
-                object result = Read(element);
-                return result == null ? new List<object>() : new List<object> {result};
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+	        object result = Read(element);
+
+	        return result == null ? new List<object>() : new List<object> {result};
         }
 
         private ICollection<object> PrivateReadAllMultivalued(object element)
@@ -176,26 +167,19 @@
         public void WriteAll<T>(object element, ICollection<T> values)
         {
             Debug.Assert(Access != null, Fullname);
-            try
-            {
-                if (IsMultivalued)
-                {
-                    Access.Write(element, values);
-                }
-                else
-                {
-                    Debug.Assert(values.Count <= 1, values + " for " + Fullname);
-                    foreach (T first in values)
-                    {
-                        Access.Write(element, first);
-                        return;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+	        if (IsMultivalued)
+	        {
+		        Access.Write(element, values);
+	        }
+	        else
+	        {
+		        Debug.Assert(values.Count <= 1, values + " for " + Fullname);
+		        foreach (T first in values)
+		        {
+			        Access.Write(element, first);
+			        return;
+		        }
+	        }
         }
     }
 
@@ -227,7 +211,7 @@
 
 	public class ReadingPropertyFailed : AssertionError
 	{
-		private static readonly long serialVersionUID = 6381545746042993261L;
+		private static readonly long SerialVersionUid = 6381545746042993261L;
 		public PropertyDescription Property;
 		public object Object;
 
@@ -240,7 +224,7 @@
 
 	public class NoAccessorException : Exception
 	{
-		private static readonly long serialVersionUID = -2828241533257508153L;
+		private static readonly long SerialVersionUid = -2828241533257508153L;
 
 		// TODO
 		//public PropertyDescription Outer()

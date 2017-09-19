@@ -1,9 +1,6 @@
-﻿using System.IO;
-
-namespace Fame.Dsl
+﻿namespace Fame.Dsl
 {
 	using System;
-	using System.Text;
 	using Internal;
 	using Parser;
 
