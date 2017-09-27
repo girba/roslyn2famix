@@ -50,11 +50,8 @@
         [FameProperty]
         public string Name { get; set; } = string.Empty;
 
-        [FamePropertyWithDerived]
-        public Element GetOwner()
-        {
-            return null;
-        }
+	    [FamePropertyWithDerived]
+	    public abstract Element GetOwner();
 
         public override string ToString()
         {

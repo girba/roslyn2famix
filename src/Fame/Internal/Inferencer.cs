@@ -1,4 +1,6 @@
-﻿namespace Fame.Internal
+﻿using Fame.Fm3;
+
+namespace Fame.Internal
 {
 	using System;
 	using System.Collections;
@@ -6,8 +8,6 @@
 	using System.Diagnostics;
 	using System.IO;
 	using System.Linq;
-
-	using Fm3;
 	using Parser;
 
 	public class Inferencer : AbstractPrintClient

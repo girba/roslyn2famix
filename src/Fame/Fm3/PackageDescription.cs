@@ -1,7 +1,7 @@
 ﻿namespace Fame.Fm3
 {
-    using System.Collections.Generic;
-    using Internal;
+	using System.Collections.Generic;
+	using Internal;
 
 	/// <summary>
 	/// Holds meta-information about packaging.
@@ -59,7 +59,7 @@
         [FameProperty(Opposite = "package")]
         public ISet<PropertyDescription> Extensions { get; set; }
 
-        public new Element GetOwner()
+        public override Element GetOwner()
         {
             return null;
         }

@@ -15,19 +15,18 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with 'Fame (for .NET)'. If not, see <http://www.gnu.org/licenses/>.
 
-using System.Linq;
-
 namespace Fame
 {
 	using System;
 	using System.Collections.Generic;
 	using System.Diagnostics;
+	using System.Linq;
 
 	using Common;
 	using Dsl;
+	using Fm3;
 	using Internal;
 	using Parser;
-	using Fm3;
 
 	/// <inheritdoc />
 	/// <summary>
@@ -113,7 +112,9 @@ namespace Fame
 			}
 
 			base.Add(element);
-			_bindings.Add(((Element)element).Fullname, (Element)element);
+
+			if (!_bindings.ContainsKey(((Element)element).Fullname))
+				_bindings.Add(((Element)element).Fullname, (Element)element);
 		}
 
 	    public void AddClassDescription(Type cls, MetaDescription desc)
@@ -241,7 +242,10 @@ namespace Fame
 
 	    private MetaDescription LookupClass(Type jclass)
 	    {
-		    return _classes[jclass];
+			if (_classes.ContainsKey(jclass))
+				return _classes[jclass];
+
+		    return null;
 	    }
 
 	    private MetaDescription LookupFull(Type jclass)
@@ -267,17 +271,17 @@ namespace Fame
 		/// @see FameProperty
 		/// @throws AssertionError if the Java-class is not annotated.
 		/// </summary>
-		/// <param name="jclass">an annotated C#-class</param>
-		public void With(Type jclass)
+		/// <param name="annotatedType">an annotated C#-class</param>
+		public void With(Type annotatedType)
 	    {
-		    MetaDescription m = LookupFull(jclass);
+		    MetaDescription m = LookupFull(annotatedType);
 		    if (m == null)
 			{
-			    MetaDescriptionFactory factory = new MetaDescriptionFactory(jclass, this);
+			    MetaDescriptionFactory factory = new MetaDescriptionFactory(annotatedType, this);
 			    if (factory.AnnotationPresent)
 			    {
 				    m = factory.CreateInstance();
-				    _classes.Add(jclass, m);
+				    _classes.Add(annotatedType, m);
 				    factory.InitializeInstance();
 				    _bindings.Add(m.Fullname, m);
 			    }
@@ -289,7 +293,7 @@ namespace Fame
 			    }
 		    }
 
-			Debug.Assert(m != null, jclass.ToString());
+			Debug.Assert(m != null, annotatedType.ToString());
 	    }
 
 		/// <summary>
@@ -310,7 +314,10 @@ namespace Fame
 
 		public T Get<T>(string fullname) where T : Element
 	    {
-		    return (T)_bindings[fullname];
+			if (_bindings.ContainsKey(fullname))
+				return (T)_bindings[fullname];
+
+		    return default(T);
 	    }
     }
 }

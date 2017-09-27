@@ -149,7 +149,7 @@
 
 			ExpectWhitespaceToken();
 
-			return new Token(TokenType.Keyword, In.Yank().ToString());
+			return new Token(TokenType.Keyword, new string(In.Yank()));
 		}
 
 		private void LetterExpected()
@@ -187,7 +187,7 @@
 			}
 
 			ExpectDelimiterToken();
-			string name = In.Yank().ToString();
+			string name = new string(In.Yank());
 			if (name.Equals("nil"))
 			{
 				return Undefined;
@@ -312,7 +312,7 @@
 			}
 
 			ExpectDelimiterToken();
-			string str = In.Yank().ToString();
+			string str = new string(In.Yank());
 
 			return isDouble ? new Token(double.Parse(str)) : new Token(int.Parse(str));
 		}
@@ -335,7 +335,7 @@
 
 			In.Inc(); // consume ':'
 
-			string name = In.Yank().ToString();
+			string name = new string(In.Yank());
 			ExpectWhitespaceToken();
 
 			if (name.Equals("id:"))

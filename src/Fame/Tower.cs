@@ -14,7 +14,7 @@
 			metamodel = m2 ?? new MetaRepository(metaMetamodel);
 			model = m1 ?? new Repository(metamodel);
 
-			Debug.Assert(metaMetamodel.GetMetamodel().Equals(metamodel));
+			Debug.Assert(metaMetamodel.GetMetamodel().Equals(metaMetamodel));
 			Debug.Assert(metamodel.GetMetamodel().Equals(metaMetamodel));
 			Debug.Assert(model.GetMetamodel().Equals(metamodel));
 		}

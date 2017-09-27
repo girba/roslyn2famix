@@ -180,6 +180,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fame\Tests\Fm3MetaMetaModelShould.cs" />
     <Compile Include="FamixTests\FamixTreeBuilderTest.cs" />
     <Compile Include="ImporterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -187,6 +188,10 @@
     <Compile Include="SyntaxTreeWalkerTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fame\Fame.csproj">
+      <Project>{E0469C97-48D8-4187-A239-BCC0B30C3F9E}</Project>
+      <Name>Fame</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Famix\Famix.csproj">
       <Project>{0e5173b4-f12d-4600-9155-e8836bcf1789}</Project>
       <Name>Famix</Name>
@@ -201,7 +206,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -1,14 +1,14 @@
 ﻿namespace Fame
 {
-    using Fm3;
+	using Fm3;
 
-    /// <summary>
-    /// Indicates an nested element, used for name resolution.
-    /// 
-    /// @see Repository#fullname(Object)
-    /// @author Adrian Kuhn, 2008
-    /// </summary>
-    public interface INested
+	/// <summary>
+	/// Indicates an nested element, used for name resolution.
+	/// 
+	/// @see Repository#fullname(Object)
+	/// @author Adrian Kuhn, 2008
+	/// </summary>
+	public interface INested
     {
         /// <summary>
         /// Returns the owner of an element, or <code>null</code>. If a class

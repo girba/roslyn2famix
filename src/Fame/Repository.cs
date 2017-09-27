@@ -15,20 +15,16 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with 'Fame (for Java)'. If not, see <http://www.gnu.org/licenses/>.
 
-
-using System.Threading;
-using System.Threading.Tasks;
-using Fame.Common;
-
 namespace Fame
 {
+	using System;
 	using System.Collections.Generic;
 	using System.Diagnostics;
-	using System;
 	using System.IO;
 	using System.Linq;
-	using System.Text;
+	using System.Threading.Tasks;
 
+	using Common;
 	using Fm3;
 	using Internal;
 	using Parser;

@@ -1,14 +1,14 @@
 ﻿namespace Fame.Fm3
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using Common;
-    using Internal;
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Collections.ObjectModel;
+	using System.Diagnostics;
+	using Common;
+	using Internal;
 
-    [FamePackage("FM3")]
+	[FamePackage("FM3")]
     [FameDescription("Property")]
     public class PropertyDescription : Element
     {
@@ -68,7 +68,7 @@
             return HasOpposite() && Opposite.IsContainer;
         }
 
-        public new MetaDescription GetOwner()
+        public override Element GetOwner()
         {
             return OwningMetaDescription;
         }

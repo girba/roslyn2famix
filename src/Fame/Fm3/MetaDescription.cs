@@ -1,11 +1,10 @@
 namespace Fame.Fm3
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
+	using System;
+	using System.Collections.Generic;
+	using System.Diagnostics;
 	using System.Linq;
-    using Internal;
-
+	using Internal;
 
 	/// <summary>
 	/// 
@@ -100,7 +99,10 @@ namespace Fame.Fm3
 
         public PropertyDescription AttributeNamed(string name)
         {
-            var property = _attributes[name];
+	        PropertyDescription property = null;
+			if (_attributes.ContainsKey(name))
+				property = _attributes[name];
+
             if (property == null && SuperClass != null)
                 property = SuperClass.AttributeNamed(name);
 
@@ -156,7 +158,7 @@ namespace Fame.Fm3
             _attributes = new Dictionary<string, PropertyDescription>();
         }
 
-        public new PackageDescription GetOwner()
+        public override Element GetOwner()
         {
             return Package;
         }

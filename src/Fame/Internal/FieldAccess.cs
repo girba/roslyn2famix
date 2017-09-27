@@ -1,4 +1,6 @@
-﻿namespace Fame.Internal
+﻿using Fame.Fm3;
+
+namespace Fame.Internal
 {
 	using System;
 	using System.Collections;
@@ -6,7 +8,6 @@
 	using System.Linq;
 	using System.Reflection;
 	using Common;
-	using Fm3;
 
 	public class FieldAccess : Access
 	{
