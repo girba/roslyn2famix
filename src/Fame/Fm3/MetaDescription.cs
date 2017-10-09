@@ -64,10 +64,10 @@ namespace Fame.Fm3
         public static readonly MetaDescription DATE = new MetaDescription("Date");
 
         private Dictionary<string, PropertyDescription> _attributes;
-        [FameProperty(Opposite = "class")]
         public IEnumerable<PropertyDescription> Attributes
         {
-            get { return _attributes.Values; }
+	        [FameProperty(Opposite = "class")]
+			get { return _attributes.Values; }
             set
             {
                 _attributes = new Dictionary<string, PropertyDescription>();
@@ -78,7 +78,7 @@ namespace Fame.Fm3
             }
         }
 
-        [FamePropertyWithDerived(Name = "allAttributes")]
+        [FameProperty(Name = "allAttributes", Derived = true)]
         public IEnumerable<PropertyDescription> AllAttributes()
         {
             var all = new Dictionary<string, PropertyDescription>();
@@ -111,14 +111,18 @@ namespace Fame.Fm3
 
         public Type BaseClass { get; set; }
 
-        [FameProperty]
-        public bool IsAbstract { get; set; }
+	    public bool IsAbstract
+	    {
+		    [FameProperty]
+			get;
+			set;
+	    }
 
         private PackageDescription _nestingPackage;
-        [FameProperty(Opposite = "classes", Container = true)]
         public PackageDescription Package
         {
-            get { return _nestingPackage; }
+	        [FameProperty(Opposite = "classes", Container = true)]
+			get { return _nestingPackage; }
             set
             {
                 _nestingPackage = value;
@@ -126,8 +130,12 @@ namespace Fame.Fm3
             }
         }
 
-        [FameProperty]
-        public MetaDescription SuperClass { get; set; }
+		public MetaDescription SuperClass
+	    {
+		    [FameProperty]
+			get;
+			set;
+	    }
 
         public static bool HasPrimitiveNamed(string name)
         {
@@ -158,10 +166,10 @@ namespace Fame.Fm3
             _attributes = new Dictionary<string, PropertyDescription>();
         }
 
-        public override Element GetOwner()
-        {
-            return Package;
-        }
+	    public override Element Owner
+	    {
+		    get { return Package; }
+	    }
 
         public override void CheckConstraints(Warnings warnings)
         {
@@ -211,7 +219,9 @@ namespace Fame.Fm3
 
         public void AddOwnedAttribute(PropertyDescription property)
         {
-            _attributes[property.Name] = property;
+			if (!_attributes.ContainsKey(property.Name))
+				_attributes[property.Name] = property;
+
             if (property.OwningMetaDescription != this)
             {
                 property.OwningMetaDescription = this;
@@ -284,14 +294,14 @@ namespace Fame.Fm3
             return this == type || (SuperClass != null && SuperClass.ConformsTo(type));
         }
 
-        [FamePropertyWithDerived]
+        [FameProperty(Derived = true)]
         public bool IsPrimitive()
         {
             return this == STRING || this == BOOLEAN || this == NUMBER || this == DATE;
         }
 
-        [FamePropertyWithDerived]
-        public bool IsRoot()
+		[FameProperty(Derived = true)]
+		public bool IsRoot()
         {
             return this == OBJECT;
         }

@@ -21,11 +21,11 @@
         }
 
         private MetaDescription _declaringClass;
-        [FameProperty(Name = "class", Opposite = "attributes", Container = true)]
         public MetaDescription OwningMetaDescription
         {
-            get
-            {
+	        [FameProperty(Name = "class", Opposite = "attributes", Container = true)]
+			get
+			{
                 return _declaringClass;
             }
             set
@@ -35,45 +35,67 @@
             }
         }
 
-        [FameProperty(Name = "package", Opposite = "extensions")]
-        public PackageDescription ExtendingPackage { get; set; }
+	    public PackageDescription ExtendingPackage
+	    {
+		    [FameProperty(Name = "package", Opposite = "extensions")]
+			get;
+			set;
+	    }
 
-        [FameProperty]
-        public bool IsContainer { get; set; }
+	    public bool IsContainer
+	    {
+		    [FameProperty]
+			get;
+			set;
+	    }
 
-        [FameProperty]
-        public bool IsDerived { get; set; }
+	    public bool IsDerived
+	    {
+		    [FameProperty]
+			get;
+			set;
+	    }
 
-        [FameProperty]
-        public bool IsMultivalued { get; set; }
+	    public bool IsMultivalued
+	    {
+		    [FameProperty]
+			get;
+			set;
+	    }
 
-        [FameProperty(Opposite = "opposite")]
-        public PropertyDescription Opposite { get; set; }
+	    public PropertyDescription Opposite
+	    {
+		    [FameProperty(Opposite = "opposite")]
+			get;
+			set;
+	    }
 
-        [FameProperty]
-        public MetaDescription Type { get; set; }
+	    public MetaDescription Type
+	    {
+		    [FameProperty]
+			get;
+			set;
+	    }
 
         public Access Access { private get; set; }
-
-        public new string Name { get; set; }
 
         public bool HasOpposite()
         {
             return Opposite != null;
         }
 
-        [FamePropertyWithDerived]
+		[FameProperty(Derived = true)]
         public bool IsComposite()
         {
             return HasOpposite() && Opposite.IsContainer;
         }
 
-        public override Element GetOwner()
-        {
-            return OwningMetaDescription;
-        }
+	    public override Element Owner
+	    {
+		    get { return OwningMetaDescription; }
+	    }
 
-        public bool IsPrimitive()
+	    public bool IsPrimitive()
         {
             Debug.Assert(Type != null, Fullname);
             return Type.IsPrimitive();

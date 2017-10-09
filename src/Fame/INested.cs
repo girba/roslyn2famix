@@ -17,6 +17,6 @@
         /// 
         /// @return may return <code>null</code>
         /// </summary>
-        Element GetOwner();
+	    Element Owner { get; }
     }
 }

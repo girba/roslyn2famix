@@ -51,14 +51,14 @@
 				{
 					name = _base.Name;
 
-					if (name.StartsWith("is", StringComparison.Ordinal))
+					if (name.StartsWith("Is", StringComparison.Ordinal))
 					{
 						name = char.ToLower(name[2]) + name.Substring(3);
 					}
 
-					if (name.StartsWith("get", StringComparison.Ordinal))
+					if (name.StartsWith("get_", StringComparison.Ordinal))
 					{
-						name = char.ToLower(name[3]) + name.Substring(4);
+						name = char.ToLower(name[4]) + name.Substring(5);
 					}
 				}
 
@@ -108,7 +108,7 @@
 			}
 
 			PropertyDescription opposite = _instance.Type.AttributeNamed(oppositeName);
-			Debug.Assert(opposite != null, "Opposite not found: " + oppositeName + " in " + _instance.Type);
+			Debug.Assert(opposite != null, "Opposite not found: " + oppositeName + " in " + _instance.Type);  // TODO: Assert crashes because opposite reference is not found (e.g. attributes --> class)
 			_instance.Opposite = opposite;
 		}
 

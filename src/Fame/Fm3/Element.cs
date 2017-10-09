@@ -27,8 +27,8 @@
 	[FamePackage("FM3")]
     [FameDescription("Element")]
     public abstract class Element : INamed, INested
-    {
-        public Element()
+	{
+		public Element()
         {
         }
 
@@ -37,21 +37,28 @@
             Name = name;
         }
 
-        [FamePropertyWithDerived]
         public string Fullname
         {
-            get
-            {
-                var parent = GetOwner();
+	        [FameProperty(Derived = true)]
+			get
+			{
+                var parent = Owner;
                 return parent == null ? Name : parent.Fullname + "." + Name;
             }
         }
 
-        [FameProperty]
-        public string Name { get; set; } = string.Empty;
+		public string Name
+		{
+			[FameProperty]
+			get;
+			set;
+		}
 
-	    [FamePropertyWithDerived]
-	    public abstract Element GetOwner();
+		public abstract Element Owner
+		{
+			[FameProperty(Derived = true)]
+			get;
+		}
 
         public override string ToString()
         {

@@ -3,6 +3,7 @@ namespace Fame.Internal
 	using System;
 	using System.Diagnostics;
 	using System.Collections;
+	using System.Collections.Generic;
 	using Common;
 
 	public abstract class Access
@@ -23,7 +24,7 @@ namespace Fame.Internal
 
 		public Access(Type type)
 		{
-			if (type.IsClass)
+			if (type.IsClass || type.IsValueType) // Remark: In C# boolean is not a class --> IsValueType
 			{
 				if (type.IsSubclassOf(typeof(ICollection)))
 				{
@@ -47,7 +48,7 @@ namespace Fame.Internal
 				Type rawClass = paraType.GetGenericTypeDefinition();
 
 				Debug.Assert(rawClass != null);
-				Debug.Assert(rawClass.IsSubclassOf(typeof(IEnumerable)));
+				Debug.Assert(rawClass.IsAssignableFrom(typeof(IEnumerable<>))); // TODO: Assert crashes because of ISet<>
 				Debug.Assert(paraType.GetGenericArguments().Length == 1);
 
 				_containerType = rawClass;

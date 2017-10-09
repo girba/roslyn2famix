@@ -53,18 +53,25 @@
                 warnings.Add("Name must be alphanumeric", this);
         }
 
-        [FameProperty(Opposite = "package")]
-        public ISet<MetaDescription> Elements { get; }
+	    public ISet<MetaDescription> Elements
+	    {
+		    [FameProperty(Opposite = "package")]
+			get;
+	    }
 
-        [FameProperty(Opposite = "package")]
-        public ISet<PropertyDescription> Extensions { get; set; }
+	    public ISet<PropertyDescription> Extensions
+	    {
+		    [FameProperty(Opposite = "package")]
+			get;
+			set;
+	    }
 
-        public override Element GetOwner()
-        {
-            return null;
-        }
+	    public override Element Owner
+		{
+		    get { return null; } 
+	    }
 
-        public void SetClasses(ISet<MetaDescription> classes)
+	    public void SetClasses(ISet<MetaDescription> classes)
         {
             foreach (var c in classes)
             {

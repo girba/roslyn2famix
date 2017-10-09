@@ -41,8 +41,8 @@ namespace Fame
 		public static MetaRepository CreateFm3()
 	    {
 		    MetaRepository mse = new MetaRepository(null);
-		    mse.With(typeof(MetaDescription));
-		    mse.With(typeof(Element));
+			mse.With(typeof(MetaDescription));
+			mse.With(typeof(Element));
 		    mse.With(typeof(PackageDescription));
 		    mse.With(typeof(PropertyDescription));
 		    mse.AddAll(mse._bindings.Values.ToArray());

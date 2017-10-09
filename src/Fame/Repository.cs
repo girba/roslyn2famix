@@ -61,7 +61,7 @@ namespace Fame
 			if (!(element is INested))
 				return name;
 
-			object owner = ((INested)element).GetOwner();
+			object owner = ((INested)element).Owner;
 			if (owner == null)
 				return name;
 
